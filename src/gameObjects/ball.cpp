@@ -33,3 +33,9 @@ sf::Sprite& Ball::getSprite()
 {
     return m_sprite;
 }
+
+void Ball::move()
+{
+    m_sprite.move(20, 20);
+    std::cout << "Ball moved" << std::endl;
+}

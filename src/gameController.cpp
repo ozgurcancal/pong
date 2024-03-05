@@ -78,14 +78,20 @@ void GameController::setup(){
 
 }
 
-void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
+void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) 
+{
     sf::FloatRect rect1 = sprite1.getGlobalBounds();
     sf::FloatRect rect2 = sprite2.getGlobalBounds();
-        // Check if the bottom edge of the sprite has gone below the lower boundary (y = 600)
-    if (rect1.top <= 0) {
+
+    const float boundaryTop = 0;
+    const float boundaryBottom = 600;
+    const float moveDistance = 20;
+   
+    // Check if the bottom edge of the sprite has gone below the lower boundary (y = 600)
+    if (rect1.top <= boundaryTop) {
         cout<<"collision with upper boundary detected\n";
 
-        sprite1.move(0, 20);
+        sprite1.move(0, moveDistance);
 
         m_window.clear();
 
@@ -96,10 +102,10 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
         
         m_window.display();
         
-    }else if (rect1.top + rect1.height > 600) {
+    }else if (rect1.top + rect1.height >= boundaryBottom) {
 
         cout<<"collision with lower boundary detected\n";
-        sprite1.move(0, -20);
+        sprite1.move(0, -moveDistance);
         m_window.clear();
 
         
@@ -110,9 +116,9 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
         m_window.display();
     }
 
-    if(rect2.top <= 0){
+    if(rect2.top <= boundaryTop){
         cout<<"collision with upper boundary detected\n";
-        sprite2.move(0, 20);
+        sprite2.move(0, moveDistance);
         m_window.clear();
 
         
@@ -121,9 +127,9 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
 
         
         m_window.display();
-    }else if(rect2.top + rect2.height > 600){
+    }else if(rect2.top + rect2.height >= boundaryBottom){
         cout<<"collision with lower boundary detected\n";
-        sprite2.move(0, -20);
+        sprite2.move(0, -moveDistance);
         m_window.clear();
 
         

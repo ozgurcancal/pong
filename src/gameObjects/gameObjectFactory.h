@@ -14,10 +14,6 @@
 
 class GameObjectFactory {
 public:
-
-
-
-
     std::unique_ptr<Paddle> createPaddle(PaddleType type);
     std::unique_ptr<Ball> createBall();
 
