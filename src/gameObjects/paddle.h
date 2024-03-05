@@ -21,6 +21,7 @@ public:
     Paddle(sf::Texture& texture, PaddleType type);
     void moveUp();
     void moveDown();
+    sf::Vector2f getPosition()const;
     void setPosition(const sf::RenderWindow& window, PaddlePosition position);
     sf::Sprite& getSprite();
 

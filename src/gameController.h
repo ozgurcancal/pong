@@ -4,7 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "commandHandler.h"
+#include "commands/commandHandler.h"
 #include "commands/moveUp.h"
 #include "commands/moveDown.h"
 #include "gameObjects/gameObjectFactory.h"
@@ -25,7 +25,6 @@ private:
     void handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2);
     void setup();
     void setWindowPosition();
-    //Paddle& paddle1, Paddle& paddle2
 };
 
 #endif // GAMECONTROLLER_H

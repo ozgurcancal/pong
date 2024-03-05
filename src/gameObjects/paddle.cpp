@@ -1,7 +1,7 @@
 
 #include "paddle.h"
 
-#include <iostream> // std::cout icin eklendi
+#include <iostream> // std::std::cout icin eklendi
 
 
 Paddle::Paddle(sf::Texture& paddleTexture, PaddleType type)
@@ -55,6 +55,11 @@ void Paddle::moveDown()
     m_sprite.move(0, 20); // Negative y value to move up
     std::cout << "Paddle moved down" << std::endl;
     // Execute move down command
+}
+
+sf::Vector2f Paddle::getPosition()const 
+{
+    return m_sprite.getPosition();
 }
 
 void Paddle::setPosition(const sf::RenderWindow& window,PaddlePosition position) 

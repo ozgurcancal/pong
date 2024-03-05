@@ -1,10 +1,8 @@
 
 #include "commandHandler.h"
 
-#include <iostream> // std::cout icin eklendi
 
-// CommandHandler::CommandHandler(Command* MoveUp1, Command* MoveDown1, Command* MoveUp2, Command* MoveDown2) : 
-// buttonW(MoveUp1), buttonS(MoveDown1), buttonUp(MoveUp2), buttonDown(MoveDown2) {};
+#include <iostream> // std::cout icin eklendi
 
 std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Paddle* paddle) 
 {
@@ -25,6 +23,27 @@ std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Paddle* 
 
     return nullptr;
 }
+
+
+std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Ball* ball) 
+{
+    std::cerr<<"CommandHandler::createNew(CommandType command, Ball* ball) "<<std::endl;
+    if(ball == nullptr) 
+    {
+        throw std::invalid_argument("Ball is null");
+    }
+    
+    switch(command) 
+    {
+        case CommandType::MOVE:
+            return std::unique_ptr<Command>(new MoveBall(ball));
+
+    }
+
+    return nullptr;
+}
+
+
 
 // void CommandHandler::onPressW() 
 // {

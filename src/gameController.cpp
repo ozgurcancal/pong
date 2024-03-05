@@ -2,6 +2,10 @@
 #include "gameController.h"
 
 #include <iostream>
+#include <thread>
+#include <atomic>
+#include <chrono>
+
 using namespace std;
 
 GameController::GameController(): m_window(sf::VideoMode(800, 600), "Pong Game") {
@@ -12,9 +16,16 @@ GameController::GameController(): m_window(sf::VideoMode(800, 600), "Pong Game")
     m_ball =  m_gameObjectFactory.createBall();
 }
 
+// the three main stages of the game loop
+// while (mIsRunning) {
+//     ProcessInput();
+//     UpdateGame();
+//     GenerateOutput();
+// }
 void GameController::run() {
 
     setup();
+
     while (m_window.isOpen()) {
         sf::Event event;
         while (m_window.pollEvent(event)) {
@@ -47,20 +58,30 @@ void GameController::run() {
                 if (event.key.code == sf::Keyboard::Escape) {
                     m_window.close();
                 }
-       
+             
+                  
+
+
             }
 
+        }
             m_window.clear();
-
-            
             m_window.draw(m_paddle1->getSprite());
             m_window.draw(m_paddle2->getSprite());
             m_window.draw(m_ball->getSprite());
             
             m_window.display();
-
+            std::this_thread::sleep_for(std::chrono::milliseconds(10));
             handleCollision(m_paddle1->getSprite(), m_paddle2->getSprite());
-        }
+
+            auto cmd = m_commandHandler.createNew(CommandType::MOVE, m_ball.get());
+            cmd->execute();
+
+
+            
+
+
+
     }
 }
 
@@ -78,14 +99,20 @@ void GameController::setup(){
 
 }
 
-void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
+void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) 
+{
     sf::FloatRect rect1 = sprite1.getGlobalBounds();
     sf::FloatRect rect2 = sprite2.getGlobalBounds();
-        // Check if the bottom edge of the sprite has gone below the lower boundary (y = 600)
-    if (rect1.top <= 0) {
+
+    const float boundaryTop = 0;
+    const float boundaryBottom = 600;
+    const float moveDistance = 20;
+   
+    // Check if the bottom edge of the sprite has gone below the lower boundary (y = 600)
+    if (rect1.top <= boundaryTop) {
         cout<<"collision with upper boundary detected\n";
 
-        sprite1.move(0, 20);
+        sprite1.move(0, moveDistance);
 
         m_window.clear();
 
@@ -95,11 +122,11 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
 
         
         m_window.display();
-        
-    }else if (rect1.top + rect1.height > 600) {
+
+    }else if (rect1.top + rect1.height >= boundaryBottom) {
 
         cout<<"collision with lower boundary detected\n";
-        sprite1.move(0, -20);
+        sprite1.move(0, -moveDistance);
         m_window.clear();
 
         
@@ -108,11 +135,13 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
 
         
         m_window.display();
+
+      
     }
 
-    if(rect2.top <= 0){
+    if(rect2.top <= boundaryTop){
         cout<<"collision with upper boundary detected\n";
-        sprite2.move(0, 20);
+        sprite2.move(0, moveDistance);
         m_window.clear();
 
         
@@ -121,9 +150,10 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
 
         
         m_window.display();
-    }else if(rect2.top + rect2.height > 600){
+     
+    }else if(rect2.top + rect2.height >= boundaryBottom){
         cout<<"collision with lower boundary detected\n";
-        sprite2.move(0, -20);
+        sprite2.move(0, -moveDistance);
         m_window.clear();
 
         
@@ -132,6 +162,7 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
 
         
         m_window.display();
+
     }
 }
 

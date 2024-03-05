@@ -23,25 +23,27 @@ set(HEADERS ${HEADERS}
 	${PROJECT_SOURCE_DIR}/src/commands/command.h
     ${PROJECT_SOURCE_DIR}/src/commands/moveDown.h
     ${PROJECT_SOURCE_DIR}/src/commands/moveUp.h
+    ${PROJECT_SOURCE_DIR}/src/commands/moveBall.h
 
     ${PROJECT_SOURCE_DIR}/src/gameObjects/gameObjectFactory.h
     ${PROJECT_SOURCE_DIR}/src/gameObjects/paddle.h
     ${PROJECT_SOURCE_DIR}/src/gameObjects/ball.h
 
     ${PROJECT_SOURCE_DIR}/src/gameController.h
-    ${PROJECT_SOURCE_DIR}/src/commandHandler.h
+    ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.h
 )
 
 set(SOURCES ${SOURCES}
     ${PROJECT_SOURCE_DIR}/src/commands/moveDown.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/moveUp.cpp
+    ${PROJECT_SOURCE_DIR}/src/commands/moveBall.cpp
 
     ${PROJECT_SOURCE_DIR}/src/gameObjects/gameObjectFactory.cpp
     ${PROJECT_SOURCE_DIR}/src/gameObjects/paddle.cpp
     ${PROJECT_SOURCE_DIR}/src/gameObjects/ball.cpp
 
     ${PROJECT_SOURCE_DIR}/src/gameController.cpp
-    ${PROJECT_SOURCE_DIR}/src/commandHandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.cpp
     ${PROJECT_SOURCE_DIR}/src/main.cpp
 )
 
