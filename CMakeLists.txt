@@ -34,15 +34,19 @@ set(HEADERS ${HEADERS}
 	${PROJECT_SOURCE_DIR}/src/commands/command.h
     ${PROJECT_SOURCE_DIR}/src/commands/moveDown.h
     ${PROJECT_SOURCE_DIR}/src/commands/moveUp.h
-    ${PROJECT_SOURCE_DIR}/src/inputHandler.h
+    ${PROJECT_SOURCE_DIR}/src/commandHandler.h
     ${PROJECT_SOURCE_DIR}/src/commands/paddle.h
+    ${PROJECT_SOURCE_DIR}/src/commands/paddleFactory.h
+    ${PROJECT_SOURCE_DIR}/src/gameController.h
 )
 
 set(SOURCES ${SOURCES}
     ${PROJECT_SOURCE_DIR}/src/commands/moveDown.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/moveUp.cpp
-    ${PROJECT_SOURCE_DIR}/src/inputHandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/commandHandler.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/paddle.cpp
+    ${PROJECT_SOURCE_DIR}/src/commands/paddleFactory.cpp
+    ${PROJECT_SOURCE_DIR}/src/gameController.cpp
     ${PROJECT_SOURCE_DIR}/src/main.cpp
 )
 add_executable(pong ${HEADERS} ${SOURCES})

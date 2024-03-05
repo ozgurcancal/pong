@@ -2,11 +2,34 @@
 #ifndef PADDLE_H
 #define PADDLE_H
 
-class Paddle{
-    public:
-        void moveUp();
-        void moveDown();
+#include <SFML/Graphics.hpp>
+
+enum class PaddleType {
+    Blue,
+    Red,
+};
+
+enum class PaddlePosition {
+    Left,
+    Right,
+};
+
+
+
+class Paddle {
+public:
+    Paddle(sf::Texture& texture, PaddleType type);
+    void moveUp();
+    void moveDown();
+    void setPosition(const sf::RenderWindow& window, PaddlePosition position);
+    sf::Sprite& getSprite();
+
+private:
+    sf::Sprite m_sprite;
+   
+
 };
 
 
 #endif // PADDLE_H
+
