@@ -1,10 +1,11 @@
-#ifndef INPUTHANDLER_H
-#define INPUTHANDLER_H
+#ifndef COMMANDHANDLER_H
+#define COMMANDHANDLER_H
 
 #include "commands/command.h"
-#include "commands/paddle.h"
 #include "commands/moveUp.h"
 #include "commands/moveDown.h"
+#include "gameObjects/paddle.h"
+
 #include <memory>
 
 enum class CommandType : int {
@@ -35,4 +36,4 @@ private:
 
 
 
-#endif // INPUTHANDLER_H
+#endif // COMMANDHANDLER_H

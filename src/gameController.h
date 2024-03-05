@@ -7,7 +7,7 @@
 #include "commandHandler.h"
 #include "commands/moveUp.h"
 #include "commands/moveDown.h"
-#include "commands/paddleFactory.h"
+#include "gameObjects/gameObjectFactory.h"
 
 class GameController {
 
@@ -17,9 +17,10 @@ public:
 
 private:
     sf::RenderWindow m_window;
-    PaddleFactory m_paddleFactory;
+    GameObjectFactory m_gameObjectFactory;
     CommandHandler m_commandHandler;
     std::unique_ptr<Paddle> m_paddle1, m_paddle2;
+    std::unique_ptr<Ball> m_ball;
 
     void handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2);
     void setup();

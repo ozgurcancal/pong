@@ -6,8 +6,10 @@ using namespace std;
 
 GameController::GameController(): m_window(sf::VideoMode(800, 600), "Pong Game") {
 
-    m_paddle1 = m_paddleFactory.createPaddle(PaddleType::Blue);
-    m_paddle2 = m_paddleFactory.createPaddle(PaddleType::Red);
+    m_paddle1 = m_gameObjectFactory.createPaddle(PaddleType::Blue);
+    m_paddle2 = m_gameObjectFactory.createPaddle(PaddleType::Red);
+    
+    m_ball =  m_gameObjectFactory.createBall();
 }
 
 void GameController::run() {
@@ -53,7 +55,7 @@ void GameController::run() {
             
             m_window.draw(m_paddle1->getSprite());
             m_window.draw(m_paddle2->getSprite());
-
+            m_window.draw(m_ball->getSprite());
             
             m_window.display();
 
@@ -69,6 +71,10 @@ void GameController::setup(){
 
     m_paddle1->setPosition(m_window, PaddlePosition::Left);
     m_paddle2->setPosition(m_window, PaddlePosition::Right);
+
+    m_ball->setPosition(m_window);
+
+
 
 }
 

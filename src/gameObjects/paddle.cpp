@@ -34,12 +34,8 @@ Paddle::Paddle(sf::Texture& paddleTexture, PaddleType type)
         throw "Invalid paddle type";
     }
 
-    // Get the screen resolution
-    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-
     m_sprite.setTexture(paddleTexture);
 
-    sf::FloatRect spriteBounds = m_sprite.getLocalBounds();
 }
 
 sf::Sprite& Paddle::getSprite() 
