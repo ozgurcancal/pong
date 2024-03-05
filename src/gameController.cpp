@@ -122,7 +122,6 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2)
 
         
         m_window.display();
-
     }else if (rect1.top + rect1.height >= boundaryBottom) {
 
         cout<<"collision with lower boundary detected\n";
