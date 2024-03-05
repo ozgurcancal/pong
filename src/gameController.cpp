@@ -65,21 +65,7 @@ void GameController::run() {
 void GameController::setup(){
 
 
-
-
-        // Get the desktop mode to access the screen resolution
-    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
-
-    // Calculate the window position to center it
-    unsigned int posX = (desktop.width / 2) - (m_window.getSize().x / 2);
-    unsigned int posY = (desktop.height / 2) - (m_window.getSize().y / 2);
-
-
-
-    // Set the window position
-    m_window.setPosition(sf::Vector2i(posX, posY));
-
-
+    setWindowPosition();
 
     m_paddle1->setPosition(m_window, PaddlePosition::Left);
     m_paddle2->setPosition(m_window, PaddlePosition::Right);
@@ -104,7 +90,7 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
         
         m_window.display();
         
-    }else if (rect1.top >= 600) {
+    }else if (rect1.top + rect1.height > 600) {
 
         cout<<"collision with lower boundary detected\n";
         sprite1.move(0, -20);
@@ -129,7 +115,7 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
 
         
         m_window.display();
-    }else if(rect2.top >= 600){
+    }else if(rect2.top + rect2.height > 600){
         cout<<"collision with lower boundary detected\n";
         sprite2.move(0, -20);
         m_window.clear();
@@ -141,4 +127,16 @@ void GameController::handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2) {
         
         m_window.display();
     }
+}
+
+void GameController::setWindowPosition(){
+    // Get the desktop mode to access the screen resolution
+    sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
+
+    // Calculate the window position to center it
+    unsigned int posX = (desktop.width / 2) - (m_window.getSize().x / 2);
+    unsigned int posY = (desktop.height / 2) - (m_window.getSize().y / 2);
+
+    // Set the window position
+    m_window.setPosition(sf::Vector2i(posX, posY));
 }

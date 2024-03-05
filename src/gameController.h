@@ -23,6 +23,7 @@ private:
 
     void handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2);
     void setup();
+    void setWindowPosition();
     //Paddle& paddle1, Paddle& paddle2
 };
 
