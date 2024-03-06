@@ -22,7 +22,7 @@ private:
     std::unique_ptr<Paddle> m_paddle1, m_paddle2;
     std::unique_ptr<Ball> m_ball;
 
-    void handleCollision(sf::Sprite& sprite1, sf::Sprite& sprite2);
+    void handleCollision(sf::Sprite& ps1, sf::Sprite& ps2, sf::Sprite& pb);
     void setup();
     void setWindowPosition();
 };

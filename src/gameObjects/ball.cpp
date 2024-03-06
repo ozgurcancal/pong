@@ -14,11 +14,14 @@ Ball::Ball(sf::Texture& texture)
         std::cout<<"Paddle ball loaded"<<std::endl;
     
     }
+    //to do
+    // Seed the random number generator with the time
+   //srand((int)time(0));
         // Initialize random engine and distribution once
     static std::random_device rd; // Obtain a random number from hardware
     static std::mt19937 eng(rd()); // Seed the generator
     static std::uniform_real_distribution<> distr(-1.0, 1.0); // Define range
-    float initialSpeed = 1.5f; // Constant speed for the ball
+    float initialSpeed = 1.0f; // Constant speed for the ball
     // Ensure the ball does not move vertically or horizontally
     do {
         m_velocityX = distr(eng);
@@ -60,8 +63,23 @@ sf::Sprite& Ball::getSprite()
 
 void Ball::move()
 {
+    //to do 0 ve 550 icin configurasyon degeri uret header da 
+    if (m_sprite.getPosition().y < 0 || m_sprite.getPosition().y > 550)
+    {
+        m_velocityY = -m_velocityY; // Reverse vertical velocity
+    }
     //random move
     m_sprite.move(m_velocityX, m_velocityY);
     std::cout << "Ball moved" << std::endl;
 }
 
+void Ball::setVelocityX(float velocityX)
+{
+    m_velocityX = velocityX;
+}
+
+
+void Ball::setVelocityY(float velocityY)
+{
+    m_velocityY = velocityY;
+}

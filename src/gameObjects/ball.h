@@ -10,6 +10,8 @@ public:
     Ball(sf::Texture& texture);
     sf::Vector2f getPosition()const;
     void setPosition(const sf::RenderWindow& window);
+    void setVelocityX(float velocityX);
+    void setVelocityY(float velocityY);
     void move();
     sf::Sprite& getSprite();
 
