@@ -43,6 +43,7 @@ std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Ball* ba
     return nullptr;
 }
 
+//std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Com)
 
 
 // void CommandHandler::onPressW() 

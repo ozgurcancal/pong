@@ -5,9 +5,13 @@
 #include <SFML/Graphics.hpp>
 #include <random>
 
-class Ball {
+//#include "component.h"
+
+class Ball{
 public:
+
     Ball(sf::Texture& texture);
+    
     sf::Vector2f getPosition()const;
     void setPosition(const sf::RenderWindow& window);
     void setVelocityX(float velocityX);
