@@ -20,7 +20,6 @@ ScreenController::ScreenController(sf::RenderWindow& window)
 void ScreenController::updateScreen(sf::RenderWindow& window)
 {
 
-
     while (window.pollEvent(m_event)) {
         std::cout<<"in pollevent\n";
         if (m_event.type == sf::Event::Closed) {
@@ -49,12 +48,7 @@ void ScreenController::updateScreen(sf::RenderWindow& window)
 
     }
 
-        handleCommand(CommandType::MOVE, m_ball.get());
-
-     
-
-        
-
+    handleCommand(CommandType::MOVE, m_ball.get());
 
 }
 
@@ -223,7 +217,13 @@ void ScreenController::menu(sf::RenderWindow& window){
             }
 
 
-            //while(true);
+            //menu
+            //create new options 
+            //draw
+
+
+            //options
+            //esc menu screen
 
 
 }
