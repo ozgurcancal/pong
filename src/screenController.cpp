@@ -6,11 +6,11 @@
 
 ScreenController::ScreenController(sf::RenderWindow& window)
 {
+    std::cout<<"in screencontroller\n";
     m_paddle1 = m_gameObjectFactory.createPaddle(PaddleType::Blue);
     m_paddle2 = m_gameObjectFactory.createPaddle(PaddleType::Red);
     m_ball =  m_gameObjectFactory.createBall();
 
-    std::cout<<"in updateScreen\n";
     m_paddle1->setPosition(window, PaddlePosition::Left);
     m_paddle2->setPosition(window, PaddlePosition::Right);
 
@@ -19,7 +19,6 @@ ScreenController::ScreenController(sf::RenderWindow& window)
 
 void ScreenController::updateScreen(sf::RenderWindow& window)
 {
-
 
     while (window.pollEvent(m_event)) {
         std::cout<<"in pollevent\n";
@@ -49,17 +48,13 @@ void ScreenController::updateScreen(sf::RenderWindow& window)
 
     }
 
-        handleCommand(CommandType::MOVE, m_ball.get());
-
-     
-
-        
-
+    handleCommand(CommandType::MOVE, m_ball.get());
 
 }
 
 void ScreenController::draw(sf::RenderWindow& window)
 {
+    std::cout<<"in draw\n";
     window.clear();
     window.draw(m_paddle1->getSprite());
     window.draw(m_paddle2->getSprite());
@@ -167,7 +162,7 @@ void ScreenController::handleCollision(sf::Sprite& spritePaddle1, sf::Sprite& sp
 
 
 void ScreenController::menu(sf::RenderWindow& window){
-           // Load a font
+    std::cout<<"in menu\n";
     sf::Font font;
     if (!font.loadFromFile("sprites/GreatVibes.otf")) {
         throw std::invalid_argument("Failed to load font");
@@ -223,7 +218,13 @@ void ScreenController::menu(sf::RenderWindow& window){
             }
 
 
-            //while(true);
+            //menu
+            //create new options 
+            //draw
+
+
+            //options
+            //esc menu screen
 
 
 }

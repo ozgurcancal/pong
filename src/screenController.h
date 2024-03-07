@@ -17,12 +17,19 @@ public:
     void menu(sf::RenderWindow& window);
 
 private:
+   // map <string, unique_ptr<Screen>> m_Screens;
+
+
+
+
+
+
     sf::Event m_event;
     CommandHandler m_commandHandler;
     GameObjectFactory m_gameObjectFactory;
     std::unique_ptr<Paddle> m_paddle1, m_paddle2;
     std::unique_ptr<Ball> m_ball;
-    
+
     void handleCollision(sf::Sprite& ps1, sf::Sprite& ps2, sf::Sprite& pb, sf::RenderWindow& window);
 
     template <typename T>
