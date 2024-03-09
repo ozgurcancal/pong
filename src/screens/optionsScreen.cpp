@@ -7,7 +7,7 @@
 OptionsScreen::OptionsScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball, std::shared_ptr<CommandHandler> &commendHandler) : m_paddle1(paddle1), m_paddle2(paddle2), m_ball(ball), m_commandHandler(commendHandler)
 {
     std::cout << "in OptionsScreen constructor\n";
-    createScreen(window);
+    refreshScreen(window);
 }
 // {
 
@@ -15,7 +15,7 @@ OptionsScreen::OptionsScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &
 //     createScreen(window);
 // }
 
-void OptionsScreen::createScreen(sf::RenderWindow &window)
+void OptionsScreen::refreshScreen(sf::RenderWindow &window)
 {
     if (m_paddle1 == nullptr || m_paddle2 == nullptr || m_ball == nullptr)
     {
@@ -24,12 +24,6 @@ void OptionsScreen::createScreen(sf::RenderWindow &window)
 
     std::cout << "in OptionsScreen::init\n";
 
-    // sf::Font font;
-    if (!m_font.loadFromFile("sprites/GreatVibes.otf"))
-    {
-        throw std::invalid_argument("Failed to load font");
-        std::cout << "Failed to load font" << std::endl;
-    }
     sf::Text text;
     text.setFont(m_font); // Set the font
 
@@ -60,7 +54,7 @@ void OptionsScreen::createScreen(sf::RenderWindow &window)
     m_menuItems.push_back(item);
 }
 
-void OptionsScreen::handleInput(sf::RenderWindow &window, std::string &currentScreen)
+void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback)
 {
 
     std::cout << "in OptionsScreen::uhandleInput\n";
@@ -81,34 +75,31 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::string &currentSc
                 handleCommand(CommandType::SETSPEED, 1, m_ball.get(), m_paddle1.get(), m_paddle2.get());
                 //  m_speed *= 0.5;
                 std::cout << "speed decreased\n";
-                currentScreen = "MenuScreen";
+                switchScreenCallback("MenuScreen");
                 break;
             }
 
             if (m_event.key.code == sf::Keyboard::Num2)
             {
-                //  handleCommand(CommandType::SETSPEED, 2, m_ball.get(), m_paddle1.get(), m_paddle2.get());
                 handleCommand(CommandType::SETSPEED, 2, m_ball.get(), m_paddle1.get(), m_paddle2.get());
                 //  m_speed = 1;
                 std::cout << "speed set to moderate\n";
-                currentScreen = "MenuScreen";
+                switchScreenCallback("MenuScreen");
                 break;
             }
 
             if (m_event.key.code == sf::Keyboard::Num3)
             {
-                //  handleCommand(CommandType::INCREASESPEED, m_paddle1.get());
-                //  handleCommand(CommandType::INCREASESPEED, m_paddle2.get());
                 handleCommand(CommandType::SETSPEED, 3, m_ball.get(), m_paddle1.get(), m_paddle2.get());
                 //  m_speed *= 1.5;
                 std::cout << "speed increased\n";
-                currentScreen = "MenuScreen";
+                switchScreenCallback("MenuScreen");
                 break;
             }
 
             if (m_event.key.code == sf::Keyboard::Escape)
             {
-                currentScreen = "MenuScreen";
+                switchScreenCallback("MenuScreen");
                 break;
             }
         }

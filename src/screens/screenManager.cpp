@@ -32,12 +32,15 @@ ScreenManager::ScreenManager(sf::RenderWindow &window)
 void ScreenManager::switchScreen(const std::string &screenName)
 {
     m_currentScreen = screenName;
+    //   m_ball->reset();
 }
 
 void ScreenManager::handleInput(sf::RenderWindow &window)
 {
     // buraya callback koyabilirsin
-    m_screens[m_currentScreen]->handleInput(window, m_currentScreen);
+    auto callback = [this](const std::string &screenName)
+    { this->switchScreen(screenName); };
+    m_screens[m_currentScreen]->handleInput(window, callback);
 }
 
 void ScreenManager::draw(sf::RenderWindow &window)

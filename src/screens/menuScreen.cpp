@@ -8,19 +8,19 @@
 MenuScreen::MenuScreen(sf::RenderWindow &window)
 {
     // uniq
-    createScreen(window);
+    refreshScreen(window);
 }
 
-void MenuScreen::createScreen(sf::RenderWindow &window)
+void MenuScreen::refreshScreen(sf::RenderWindow &window)
 {
     std::cout << "in MenuScreen::init\n";
 
     // sf::Font font;
-    if (!m_font.loadFromFile("sprites/GreatVibes.otf"))
-    {
-        throw std::invalid_argument("Failed to load font");
-        std::cout << "Failed to load font" << std::endl;
-    }
+    // if (!m_font.loadFromFile("sprites/GreatVibes.otf"))
+    // {
+    //     throw std::invalid_argument("Failed to load font");
+    //     std::cout << "Failed to load font" << std::endl;
+    // }
     sf::Text text;
     text.setFont(m_font); // Set the font
 
@@ -51,7 +51,7 @@ void MenuScreen::createScreen(sf::RenderWindow &window)
     m_menuItems.push_back(item);
 }
 
-void MenuScreen::handleInput(sf::RenderWindow &window, std::string &currentScreen)
+void MenuScreen::handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback)
 {
     std::cout << "in MenuScreen::uhandleInput\n";
     while (window.pollEvent(m_event))
@@ -68,13 +68,13 @@ void MenuScreen::handleInput(sf::RenderWindow &window, std::string &currentScree
             if (m_event.key.code == sf::Keyboard::Num1)
             {
 
-                currentScreen = "GameScreen";
+                switchScreenCallback("GameScreen");
                 break;
             }
             if (m_event.key.code == sf::Keyboard::Num2)
             {
                 // switch screen
-                currentScreen = "OptionsScreen";
+                switchScreenCallback("OptionsScreen");
                 break;
             }
             if (m_event.key.code == sf::Keyboard::Escape)

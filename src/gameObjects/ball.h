@@ -11,6 +11,7 @@ class Ball
 {
 public:
     Ball(sf::Texture &texture);
+    // void reset();
 
     sf::Vector2f getPosition() const;
     void setPosition(const sf::RenderWindow &window);

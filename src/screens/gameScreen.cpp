@@ -12,20 +12,15 @@ GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle
     // skoru once ekrana
 }
 
-void GameScreen::createScreen(sf::RenderWindow &window)
+void GameScreen::refreshScreen(sf::RenderWindow &window)
 {
-    // std::cout << "in createScreen\n";
-    // m_paddle1 = m_gameObjectFactory.createPaddle(PaddleType::Blue);
-    // m_paddle2 = m_gameObjectFactory.createPaddle(PaddleType::Red);
-    // m_ball = m_gameObjectFactory.createBall();
-
-    // m_paddle1->setPosition(window, PaddlePosition::Left);
-    // m_paddle2->setPosition(window, PaddlePosition::Right);
-
+    // gameobjelerini ortaya yeniden pozisyonla
+    // problem burada
     // m_ball->setPosition(window);
+    m_ball->g
 }
 
-void GameScreen::handleInput(sf::RenderWindow &window, std::string &currentScreen)
+void GameScreen::handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback)
 {
     if (m_paddle1 == nullptr || m_paddle2 == nullptr || m_ball == nullptr)
     {
@@ -62,12 +57,14 @@ void GameScreen::handleInput(sf::RenderWindow &window, std::string &currentScree
             }
             if (m_event.key.code == sf::Keyboard::Escape)
             {
-                currentScreen = "MenuScreen";
+                switchScreenCallback("MenuScreen");
             }
         }
     }
 
     handleCommand(CommandType::MOVE, m_ball);
+    handleBallOffScreen(window);
+    // handleScore();
 }
 
 void GameScreen::draw(sf::RenderWindow &window)
@@ -77,23 +74,73 @@ void GameScreen::draw(sf::RenderWindow &window)
     window.draw(m_paddle1->getSprite());
     window.draw(m_paddle2->getSprite());
     window.draw(m_ball->getSprite());
+    // drawScore(window);
     window.display();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(15));
     handleCollision(m_paddle1->getSprite(), m_paddle2->getSprite(), m_ball->getSprite(), window);
+    //  handleBallOffScreen(window);
 }
 
-void handleScore()
+void GameScreen::handleBallOffScreen(sf::RenderWindow &window)
 {
-    // if (m_ball->getSprite().getPosition().x < 0)
+    if (m_ball->getSprite().getPosition().x < 0)
+    {
+        m_ScoreY++;
+    }
+    else if (m_ball->getSprite().getPosition().x > 800)
+    {
+        m_ScoreX++;
+    }
+
+    refreshScreen(window);
+}
+
+void GameScreen::handleScore()
+{
+    if (m_ball->getSprite().getPosition().x < 0)
+    {
+        m_ScoreY++;
+    }
+    else if (m_ball->getSprite().getPosition().x > 800)
+    {
+        m_ScoreX++;
+    }
+
+    // if (!m_font.loadFromFile("sprites/GreatVibes.otf"))
     // {
-    //     m_ScoreY++;
+    //     throw std::invalid_argument("Failed to load font");
+    //     std::cout << "Failed to load font" << std::endl;
     // }
-    // else if (m_ball->getSprite().getPosition().x > 800)
+
+    std::vector<std::string> scores = {"0", "0"};
+    scores[0] = std::to_string(m_ScoreX);
+    // scores[1] = std::to_string(m_ScoreY);
+    sf::Text item;
+
+    std::string str = scores[0];
+    // for (int i = 0; i < scores.size(); ++i)
     // {
-    //     m_ScoreX++;
+    item.setFont(m_font);
+    item.setString(str);
+    item.setCharacterSize(50);
+    item.setFillColor(sf::Color::White);
+    item.setPosition(470.f, 30.f);
+    m_scoreItems.push_back(item);
     // }
 }
+
+void GameScreen::drawScore(sf::RenderWindow &window)
+{
+
+    for (auto &item : m_scoreItems)
+    {
+        window.draw(item);
+        // window.display();
+        //  window.clear();
+    }
+}
+
 void GameScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePaddle2, sf::Sprite &spriteBall, sf::RenderWindow &window)
 {
 
@@ -164,7 +211,7 @@ void GameScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePa
 
         window.draw(spritePaddle1);
         window.draw(spritePaddle2);
-
+        //   drawScore(window);
         window.display();
     }
     else if (rectSprite2.top + rectSprite2.height >= boundaryBottom)

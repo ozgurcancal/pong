@@ -63,7 +63,7 @@ void Paddle::moveDown()
 
 void Paddle::setSpeed(float inSpeed)
 {
-    m_velocity *= inSpeed;
+    m_velocity = inSpeed * 20.0f;
 }
 
 sf::Vector2f Paddle::getPosition() const

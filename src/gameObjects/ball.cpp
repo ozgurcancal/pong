@@ -16,10 +16,32 @@ Ball::Ball(sf::Texture &texture)
     {
         std::cout << "Paddle ball loaded" << std::endl;
     }
-    // to do
-    //  Seed the random number generator with the time
-    // srand((int)time(0));
-    //  Initialize random engine and distribution once
+    // // to do
+    // //  Seed the random number generator with the time
+    // // srand((int)time(0));
+    // //  Initialize random engine and distribution once
+    // static std::random_device rd;                             // Obtain a random number from hardware
+    // static std::mt19937 eng(rd());                            // Seed the generator
+    // static std::uniform_real_distribution<> distr(-1.0, 1.0); // Define range
+    // float initialSpeed = 1.0f;                                // Constant speed for the ball
+    // // Ensure the ball does not move vertically or horizontally
+    // do
+    // {
+    //     m_velocityX = distr(eng);
+    //     m_velocityY = distr(eng);
+    // } while (m_velocityX == 0 || m_velocityY == 0);
+
+    // // Normalize the direction vector
+    // float length = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY);
+    // m_velocityX /= length;
+    // m_velocityY /= length;
+
+    // // Apply the constant speed to the direction
+    // m_velocityX = m_velocityX * initialSpeed;
+    // m_velocityY = m_velocityY * initialSpeed;
+
+    m_sprite.setTexture(texture);
+
     static std::random_device rd;                             // Obtain a random number from hardware
     static std::mt19937 eng(rd());                            // Seed the generator
     static std::uniform_real_distribution<> distr(-1.0, 1.0); // Define range
@@ -39,9 +61,13 @@ Ball::Ball(sf::Texture &texture)
     // Apply the constant speed to the direction
     m_velocityX = m_velocityX * initialSpeed;
     m_velocityY = m_velocityY * initialSpeed;
-
-    m_sprite.setTexture(texture);
 }
+
+// void Ball::reset()
+// {
+
+//     m_ball->setPosition();
+// }
 
 sf::Vector2f Ball::getPosition() const
 {
