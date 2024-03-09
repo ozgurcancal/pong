@@ -54,25 +54,3 @@ std::unique_ptr<Command> CommandHandler::createNew(CommandType command, float in
 
     return nullptr;
 }
-
-// std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Com)
-
-// void CommandHandler::onPressW()
-// {
-//     buttonW->execute();
-// }
-
-// void CommandHandler::onPressS()
-// {
-//     buttonS->execute();
-// }
-
-// void CommandHandler::onPressUp()
-// {
-//     buttonUp->execute();
-// }
-
-// void CommandHandler::onPressDown()
-// {
-//     buttonDown->execute();
-// }

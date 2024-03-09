@@ -8,6 +8,8 @@ GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle
 {
     std::cout << "in gameScreen constructor\n";
     // createScreen(window);
+
+    // skoru once ekrana
 }
 
 void GameScreen::createScreen(sf::RenderWindow &window)
@@ -81,6 +83,17 @@ void GameScreen::draw(sf::RenderWindow &window)
     handleCollision(m_paddle1->getSprite(), m_paddle2->getSprite(), m_ball->getSprite(), window);
 }
 
+void handleScore()
+{
+    // if (m_ball->getSprite().getPosition().x < 0)
+    // {
+    //     m_ScoreY++;
+    // }
+    // else if (m_ball->getSprite().getPosition().x > 800)
+    // {
+    //     m_ScoreX++;
+    // }
+}
 void GameScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePaddle2, sf::Sprite &spriteBall, sf::RenderWindow &window)
 {
 

@@ -47,6 +47,9 @@ private:
             throw std::invalid_argument("Command is null");
         }
     }
+
+    int m_ScoreX = 0;
+    int m_ScoreY = 0;
 };
 
 #endif // GAMESCREEN_H
