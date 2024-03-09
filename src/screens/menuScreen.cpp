@@ -100,18 +100,4 @@ void MenuScreen::draw(sf::RenderWindow &window)
 
     // Display the contents of the window
     window.display();
-
-    bool keyPressed = false;
-    // while (window.pollEvent(m_event) || !keyPressed)
-    // {
-    //     if (m_event.type == sf::Event::Closed)
-    //     {
-    //         window.close();
-    //     }
-    //     if (m_event.type == sf::Event::KeyPressed)
-    //     {
-    //         keyPressed = true;
-    //         break;
-    //     }
-    // }
 }

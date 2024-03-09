@@ -5,6 +5,7 @@
 #include "moveUp.h"
 #include "moveDown.h"
 #include "moveBall.h"
+#include "increaseSpeed.h"
 
 #include "component.h"
 #include "paddle.h"
@@ -26,6 +27,7 @@ class CommandHandler
 public:
     std::unique_ptr<Command> createNew(CommandType group, Paddle *paddle);
     std::unique_ptr<Command> createNew(CommandType group, Ball *ball);
+    std::unique_ptr<Command> createNew(CommandType group, Ball *ball, Paddle *paddle1, Paddle *paddle2);
 };
 
 //  std::unique_ptr<Command> createNew(CommandType group, Component* ball);

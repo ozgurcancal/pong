@@ -4,14 +4,24 @@
 
 #include <iostream>
 
-OptionsScreen::OptionsScreen(sf::RenderWindow &window)
+OptionsScreen::OptionsScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball, std::shared_ptr<CommandHandler> &commendHandler) : m_paddle1(paddle1), m_paddle2(paddle2), m_ball(ball), m_commandHandler(commendHandler)
 {
-    std::cout << "in Options::Options\n";
+    std::cout << "in OptionsScreen constructor\n";
     createScreen(window);
 }
+// {
+
+//     std::cout << "in OptionsScreen constructor\n";
+//     createScreen(window);
+// }
 
 void OptionsScreen::createScreen(sf::RenderWindow &window)
 {
+    if (m_paddle1 == nullptr || m_paddle2 == nullptr || m_ball == nullptr)
+    {
+        throw std::invalid_argument("Paddle or ball is null");
+    }
+
     std::cout << "in OptionsScreen::init\n";
 
     // sf::Font font;
@@ -52,6 +62,7 @@ void OptionsScreen::createScreen(sf::RenderWindow &window)
 
 void OptionsScreen::handleInput(sf::RenderWindow &window, std::string &currentScreen)
 {
+
     std::cout << "in OptionsScreen::uhandleInput\n";
     while (window.pollEvent(m_event))
     {
@@ -65,8 +76,12 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::string &currentSc
         {
             if (m_event.key.code == sf::Keyboard::Up)
             {
-                m_speed *= 1.5;
+                //  handleCommand(CommandType::INCREASESPEED, m_paddle1.get());
+                //  handleCommand(CommandType::INCREASESPEED, m_paddle2.get());
+                handleCommand(CommandType::INCREASESPEED, m_ball.get(), m_paddle1.get(), m_paddle2.get());
+                //  m_speed *= 1.5;
                 std::cout << "speed increased\n";
+                break;
             }
 
             if (m_event.key.code == sf::Keyboard::Escape)
@@ -76,6 +91,23 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::string &currentSc
             }
         }
     }
+}
+
+void OptionsScreen::draw(sf::RenderWindow &window)
+{
+
+    std::cout << "in OptionsScreen::draw\n";
+    // Clear the window
+    window.clear();
+
+    // Draw menu items
+    for (auto &item : m_menuItems)
+    {
+        window.draw(item);
+    }
+
+    // Display the contents of the window
+    window.display();
 }
 
 // void OptionsScreen::handleOnput(sf::RenderWindow &window, std::function<void(std::any)> callBack)
@@ -100,26 +132,9 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::string &currentSc
 
 //             if (m_event.key.code == sf::Keyboard::Escape)
 //             {
-//                 // currentScreen = "MenuScreen";
+//                 // currentScreen = "OptionsScreen";
 //                 break;
 //             }
 //         }
 //     }
 // }
-
-void OptionsScreen::draw(sf::RenderWindow &window)
-{
-
-    std::cout << "in OptionsScreen::draw\n";
-    // Clear the window
-    window.clear();
-
-    // Draw menu items
-    for (auto &item : m_menuItems)
-    {
-        window.draw(item);
-    }
-
-    // Display the contents of the window
-    window.display();
-}

@@ -4,27 +4,32 @@
 #include <thread>
 #include <chrono>
 
-GameScreen::GameScreen(sf::RenderWindow &window)
+GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball, std::shared_ptr<CommandHandler> &commendHandler) : m_paddle1(paddle1.get()), m_paddle2(paddle2.get()), m_ball(ball.get()), m_commandHandler(commendHandler.get())
 {
     std::cout << "in gameScreen constructor\n";
-    createScreen(window);
+    // createScreen(window);
 }
 
 void GameScreen::createScreen(sf::RenderWindow &window)
 {
-    std::cout << "in createScreen\n";
-    m_paddle1 = m_gameObjectFactory.createPaddle(PaddleType::Blue);
-    m_paddle2 = m_gameObjectFactory.createPaddle(PaddleType::Red);
-    m_ball = m_gameObjectFactory.createBall();
+    // std::cout << "in createScreen\n";
+    // m_paddle1 = m_gameObjectFactory.createPaddle(PaddleType::Blue);
+    // m_paddle2 = m_gameObjectFactory.createPaddle(PaddleType::Red);
+    // m_ball = m_gameObjectFactory.createBall();
 
-    m_paddle1->setPosition(window, PaddlePosition::Left);
-    m_paddle2->setPosition(window, PaddlePosition::Right);
+    // m_paddle1->setPosition(window, PaddlePosition::Left);
+    // m_paddle2->setPosition(window, PaddlePosition::Right);
 
-    m_ball->setPosition(window);
+    // m_ball->setPosition(window);
 }
 
 void GameScreen::handleInput(sf::RenderWindow &window, std::string &currentScreen)
 {
+    if (m_paddle1 == nullptr || m_paddle2 == nullptr || m_ball == nullptr)
+    {
+        throw std::invalid_argument("Paddle or ball is null");
+    }
+
     std::cout << "in GameScreen::handleInput\n";
     while (window.pollEvent(m_event))
     {
@@ -39,19 +44,19 @@ void GameScreen::handleInput(sf::RenderWindow &window, std::string &currentScree
             std::cout << "in keypressed\n";
             if (m_event.key.code == sf::Keyboard::W)
             {
-                handleCommand(CommandType::MOVEUP, m_paddle1.get());
+                handleCommand(CommandType::MOVEUP, m_paddle1);
             }
             if (m_event.key.code == sf::Keyboard::S)
             {
-                handleCommand(CommandType::MOVEDOWN, m_paddle1.get());
+                handleCommand(CommandType::MOVEDOWN, m_paddle1);
             }
             if (m_event.key.code == sf::Keyboard::Up)
             {
-                handleCommand(CommandType::MOVEUP, m_paddle2.get());
+                handleCommand(CommandType::MOVEUP, m_paddle2);
             }
             if (m_event.key.code == sf::Keyboard::Down)
             {
-                handleCommand(CommandType::MOVEDOWN, m_paddle2.get());
+                handleCommand(CommandType::MOVEDOWN, m_paddle2);
             }
             if (m_event.key.code == sf::Keyboard::Escape)
             {
@@ -60,12 +65,12 @@ void GameScreen::handleInput(sf::RenderWindow &window, std::string &currentScree
         }
     }
 
-    handleCommand(CommandType::MOVE, m_ball.get());
+    handleCommand(CommandType::MOVE, m_ball);
 }
 
 void GameScreen::draw(sf::RenderWindow &window)
 {
-    std::cout << "in GameScreen::draw\n";
+    std::cout << "in draw\n";
     window.clear();
     window.draw(m_paddle1->getSprite());
     window.draw(m_paddle2->getSprite());

@@ -6,7 +6,7 @@
 #include "screen.h"
 #include "commandHandler.h"
 #include "component.h"
-#include "gameObjectFactory.h"
+// #include "gameObjectFactory.h"
 
 #include <iostream>
 
@@ -20,7 +20,8 @@ class GameScreen : public Screen
     //     void draw(sf::RenderWindow& window) override;
 
 public:
-    GameScreen(sf::RenderWindow &window);
+    GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball,
+               std::shared_ptr<CommandHandler> &commandHandler);
 
     void handleInput(sf::RenderWindow &window, std::string &currentScreen) override;
     void draw(sf::RenderWindow &window) override;
@@ -28,10 +29,10 @@ public:
 
 private:
     sf::Event m_event;
-    CommandHandler m_commandHandler;
-    GameObjectFactory m_gameObjectFactory;
-    std::unique_ptr<Paddle> m_paddle1, m_paddle2;
-    std::unique_ptr<Ball> m_ball;
+    CommandHandler *m_commandHandler;
+    // GameObjectFactory m_gameObjectFactory;
+    Paddle *m_paddle1, *m_paddle2;
+    Ball *m_ball;
 
     void createScreen(sf::RenderWindow &window) override;
     void handleCollision(sf::Sprite &ps1, sf::Sprite &ps2, sf::Sprite &pb, sf::RenderWindow &window);
@@ -39,7 +40,7 @@ private:
     template <typename T>
     void handleCommand(CommandType command, T *component)
     {
-        auto cmd = m_commandHandler.createNew(command, component);
+        auto cmd = m_commandHandler->createNew(command, component);
         cmd->execute();
         if (cmd == nullptr)
         {

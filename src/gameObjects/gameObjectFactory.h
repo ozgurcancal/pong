@@ -12,10 +12,11 @@
 //     Multiplayer
 // };
 
-class GameObjectFactory {
+class GameObjectFactory
+{
 public:
-    std::unique_ptr<Paddle> createPaddle(PaddleType type);
-    std::unique_ptr<Ball> createBall();
+    std::shared_ptr<Paddle> createPaddle(PaddleType type);
+    std::shared_ptr<Ball> createBall();
 
 private:
     sf::Texture m_paddleTexture1;

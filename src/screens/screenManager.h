@@ -9,6 +9,7 @@
 #include "gameScreen.h"
 #include "menuScreen.h"
 #include "optionsScreen.h"
+#include "gameObjectFactory.h"
 
 class ScreenManager
 {
@@ -22,6 +23,10 @@ public:
 private:
     std::map<std::string, std::unique_ptr<Screen>> m_screens;
     std::string m_currentScreen;
+    GameObjectFactory m_gameObjectFactory;
+    std::shared_ptr<Paddle> m_paddle1, m_paddle2;
+    std::shared_ptr<Ball> m_ball;
+    std::shared_ptr<CommandHandler> m_commandHandler;
 };
 
 #endif // SCREENMANAGER_H

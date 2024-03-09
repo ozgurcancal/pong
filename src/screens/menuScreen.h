@@ -10,12 +10,11 @@ class MenuScreen : public Screen
 
 public:
     MenuScreen(sf::RenderWindow &window);
-
+    void createScreen(sf::RenderWindow &window) override;
     void handleInput(sf::RenderWindow &window, std::string &currentScreen) override;
     void draw(sf::RenderWindow &window) override;
 
 private:
-    void createScreen(sf::RenderWindow &window) override;
     // Fix: Add a data type and a variable name to the declaration
     sf::Event m_event;
     std::vector<sf::Text> m_menuItems;

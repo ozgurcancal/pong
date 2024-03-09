@@ -78,8 +78,8 @@ void Ball::move()
 void Ball::increaseSpeed()
 {
     // Increase the speed of the ball
-    m_velocityX *= 1.5f;
-    m_velocityY *= 1.5f;
+    m_velocityX *= 10.0f;
+    m_velocityY *= 10.0f;
 }
 
 void Ball::setVelocityX(float velocityX)
