@@ -41,7 +41,7 @@ void OptionsScreen::createScreen(sf::RenderWindow &window)
 
     // std::vector<sf::Text> menuItems;
 
-    std::vector<std::string> titles = {"Game Speed"};
+    std::vector<std::string> titles = {"Game Speed", "1-Slow", "2-Moderate", "3-Fast"};
     sf::Text item;
     for (int i = 0; i < titles.size(); ++i)
     {
@@ -74,13 +74,35 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::string &currentSc
 
         if (m_event.type == sf::Event::KeyPressed)
         {
-            if (m_event.key.code == sf::Keyboard::Up)
+            if (m_event.key.code == sf::Keyboard::Num1)
+            {
+                //  handleCommand(CommandType::DECREASESPEED, m_paddle1.get());
+                //  handleCommand(CommandType::DECREASESPEED, m_paddle2.get());
+                handleCommand(CommandType::SETSPEED, 1, m_ball.get(), m_paddle1.get(), m_paddle2.get());
+                //  m_speed *= 0.5;
+                std::cout << "speed decreased\n";
+                currentScreen = "MenuScreen";
+                break;
+            }
+
+            if (m_event.key.code == sf::Keyboard::Num2)
+            {
+                //  handleCommand(CommandType::SETSPEED, 2, m_ball.get(), m_paddle1.get(), m_paddle2.get());
+                handleCommand(CommandType::SETSPEED, 2, m_ball.get(), m_paddle1.get(), m_paddle2.get());
+                //  m_speed = 1;
+                std::cout << "speed set to moderate\n";
+                currentScreen = "MenuScreen";
+                break;
+            }
+
+            if (m_event.key.code == sf::Keyboard::Num3)
             {
                 //  handleCommand(CommandType::INCREASESPEED, m_paddle1.get());
                 //  handleCommand(CommandType::INCREASESPEED, m_paddle2.get());
-                handleCommand(CommandType::INCREASESPEED, m_ball.get(), m_paddle1.get(), m_paddle2.get());
+                handleCommand(CommandType::SETSPEED, 3, m_ball.get(), m_paddle1.get(), m_paddle2.get());
                 //  m_speed *= 1.5;
                 std::cout << "speed increased\n";
+                currentScreen = "MenuScreen";
                 break;
             }
 

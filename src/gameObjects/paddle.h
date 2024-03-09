@@ -24,14 +24,14 @@ public:
     Paddle(sf::Texture &texture, PaddleType type);
     void moveUp();
     void moveDown();
-    void increaseSpeed();
+    void setSpeed(float inSpeed);
     sf::Vector2f getPosition() const;
     void setPosition(const sf::RenderWindow &window, PaddlePosition position);
     sf::Sprite &getSprite();
 
 private:
     sf::Sprite m_sprite;
-    float m_velocity;
+    float m_velocity = 10.0f;
 };
 
 #endif // PADDLE_H

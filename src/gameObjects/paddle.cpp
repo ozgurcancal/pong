@@ -38,8 +38,6 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
     }
 
     m_sprite.setTexture(paddleTexture);
-
-    m_velocity = 20.0f; // Set the paddle's velocity
 }
 
 sf::Sprite &Paddle::getSprite()
@@ -63,11 +61,9 @@ void Paddle::moveDown()
     // Execute move down command
 }
 
-void Paddle::increaseSpeed()
+void Paddle::setSpeed(float inSpeed)
 {
-    // Increase the speed of the paddle
-    // to do
-    m_velocity *= 1.5f;
+    m_velocity *= inSpeed;
 }
 
 sf::Vector2f Paddle::getPosition() const

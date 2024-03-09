@@ -75,11 +75,11 @@ void Ball::move()
     std::cout << "Ball moved" << std::endl;
 }
 
-void Ball::increaseSpeed()
+void Ball::setSpeed(float inSpeed)
 {
     // Increase the speed of the ball
-    m_velocityX *= 10.0f;
-    m_velocityY *= 10.0f;
+    m_velocityX = inSpeed;
+    m_velocityY = inSpeed;
 }
 
 void Ball::setVelocityX(float velocityX)

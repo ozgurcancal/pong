@@ -22,9 +22,8 @@ ScreenManager::ScreenManager(sf::RenderWindow &window)
     m_screens["GameScreen"] = std::make_unique<GameScreen>(window, m_paddle1, m_paddle2, m_ball, m_commandHandler);
 
     m_currentScreen = "MenuScreen";
+    // to do game objesini her seferinde yeniden initialize etmen lazim
 
-    // createi constructora tasi menuScreen ve gameScreen icindeki
-    //  m_screens[m_currentScreen]->createScreen(window);
     m_screens[m_currentScreen]->draw(window);
     // m_Screens["GameOverScreen"] = std::make_unique<GameOverScreen>();
 }

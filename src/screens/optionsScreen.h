@@ -5,7 +5,7 @@
 
 #include "screen.h"
 #include "commandHandler.h"
-#include "component.h"
+// #include "component.h"
 
 class OptionsScreen : public Screen
 {
@@ -30,9 +30,9 @@ private:
     std::shared_ptr<Ball> m_ball;
 
     template <typename... T>
-    void handleCommand(CommandType command, T *...components)
+    void handleCommand(CommandType command, float input, T *...components)
     {
-        auto cmd = m_commandHandler->createNew(command, components...);
+        auto cmd = m_commandHandler->createNew(command, input, components...);
         cmd->execute();
         if (cmd == nullptr)
         {

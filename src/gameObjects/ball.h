@@ -17,7 +17,7 @@ public:
     void setVelocityX(float velocityX);
     void setVelocityY(float velocityY);
     void move();
-    void increaseSpeed();
+    void setSpeed(float inSpeed);
     sf::Sprite &getSprite();
 
 private:

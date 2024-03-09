@@ -26,7 +26,7 @@ set(HEADERS ${HEADERS}
     ${PROJECT_SOURCE_DIR}/src/commands/moveDown.h
     ${PROJECT_SOURCE_DIR}/src/commands/moveUp.h
     ${PROJECT_SOURCE_DIR}/src/commands/moveBall.h
-    ${PROJECT_SOURCE_DIR}/src/commands/increaseSpeed.h
+    ${PROJECT_SOURCE_DIR}/src/commands/setSpeed.h
     ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.h
 
     ${PROJECT_SOURCE_DIR}/src/gameObjects/component.h
@@ -49,7 +49,7 @@ set(SOURCES ${SOURCES}
     ${PROJECT_SOURCE_DIR}/src/commands/moveDown.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/moveUp.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/moveBall.cpp
-    ${PROJECT_SOURCE_DIR}/src/commands/increaseSpeed.cpp
+    ${PROJECT_SOURCE_DIR}/src/commands/setSpeed.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.cpp
 
     ${PROJECT_SOURCE_DIR}/src/gameObjects/gameObjectFactory.cpp
