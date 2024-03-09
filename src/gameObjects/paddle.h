@@ -4,34 +4,34 @@
 
 #include <SFML/Graphics.hpp>
 
-//#include "component.h"
+// #include "component.h"
 
-enum class PaddleType {
+enum class PaddleType
+{
     Blue,
     Red,
 };
 
-enum class PaddlePosition {
+enum class PaddlePosition
+{
     Left,
     Right,
 };
 
-
-class Paddle {
+class Paddle
+{
 public:
-    Paddle(sf::Texture& texture, PaddleType type);
+    Paddle(sf::Texture &texture, PaddleType type);
     void moveUp();
     void moveDown();
-    sf::Vector2f getPosition()const;
-    void setPosition(const sf::RenderWindow& window, PaddlePosition position);
-    sf::Sprite& getSprite();
+    void increaseSpeed();
+    sf::Vector2f getPosition() const;
+    void setPosition(const sf::RenderWindow &window, PaddlePosition position);
+    sf::Sprite &getSprite();
 
 private:
     sf::Sprite m_sprite;
-   
-
+    float m_velocity;
 };
 
-
 #endif // PADDLE_H
-

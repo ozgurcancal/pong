@@ -6,22 +6,31 @@
 
 ScreenManager::ScreenManager(sf::RenderWindow &window)
 {
-    m_screens["MenuScreen"] = std::make_unique<MenuScreen>();
-    m_screens["GameScreen"] = std::make_unique<GameScreen>();
+    m_screens["MenuScreen"] = std::make_unique<MenuScreen>(window);
+    m_screens["GameScreen"] = std::make_unique<GameScreen>(window);
+    m_screens["OptionsScreen"] = std::make_unique<OptionsScreen>(window);
 
     m_currentScreen = "MenuScreen";
 
     // createi constructora tasi menuScreen ve gameScreen icindeki
-    m_screens[m_currentScreen]->createScreen(window);
+    //  m_screens[m_currentScreen]->createScreen(window);
     m_screens[m_currentScreen]->draw(window);
     // m_Screens["GameOverScreen"] = std::make_unique<GameOverScreen>();
 }
 
-void ScreenManager::switchScreen(const std::string &screenName, sf::RenderWindow &window)
+// make use or remove
+void ScreenManager::switchScreen(const std::string &screenName)
 {
     m_currentScreen = screenName;
+}
 
-    m_screens[screenName]->createScreen(window);
-    m_screens[screenName]->updateScreen(window);
-    m_screens[screenName]->draw(window);
+void ScreenManager::handleInput(sf::RenderWindow &window)
+{
+    // buraya callback koyabilirsin
+    m_screens[m_currentScreen]->handleInput(window, m_currentScreen);
+}
+
+void ScreenManager::draw(sf::RenderWindow &window)
+{
+    m_screens[m_currentScreen]->draw(window);
 }

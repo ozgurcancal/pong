@@ -5,6 +5,12 @@
 #include <thread>
 #include <chrono>
 
+MenuScreen::MenuScreen(sf::RenderWindow &window)
+{
+    // uniq
+    createScreen(window);
+}
+
 void MenuScreen::createScreen(sf::RenderWindow &window)
 {
     std::cout << "in MenuScreen::init\n";
@@ -45,10 +51,38 @@ void MenuScreen::createScreen(sf::RenderWindow &window)
     m_menuItems.push_back(item);
 }
 
-void MenuScreen::updateScreen(sf::RenderWindow &window)
+void MenuScreen::handleInput(sf::RenderWindow &window, std::string &currentScreen)
 {
-    std::cout << "in MenuScreen::update\n";
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::cout << "in MenuScreen::uhandleInput\n";
+    while (window.pollEvent(m_event))
+    {
+        std::cout << "in pollevent\n";
+        if (m_event.type == sf::Event::Closed)
+        {
+            window.close();
+        }
+
+        if (m_event.type == sf::Event::KeyPressed)
+        {
+            std::cout << "in keypressed\n";
+            if (m_event.key.code == sf::Keyboard::Num1)
+            {
+
+                currentScreen = "GameScreen";
+                break;
+            }
+            if (m_event.key.code == sf::Keyboard::Num2)
+            {
+                // switch screen
+                currentScreen = "OptionsScreen";
+                break;
+            }
+            if (m_event.key.code == sf::Keyboard::Escape)
+            {
+                window.close();
+            }
+        }
+    }
 }
 
 void MenuScreen::draw(sf::RenderWindow &window)
@@ -68,16 +102,16 @@ void MenuScreen::draw(sf::RenderWindow &window)
     window.display();
 
     bool keyPressed = false;
-    while (window.pollEvent(m_event) || !keyPressed)
-    {
-        if (m_event.type == sf::Event::Closed)
-        {
-            window.close();
-        }
-        if (m_event.type == sf::Event::KeyPressed)
-        {
-            keyPressed = true;
-            break;
-        }
-    }
+    // while (window.pollEvent(m_event) || !keyPressed)
+    // {
+    //     if (m_event.type == sf::Event::Closed)
+    //     {
+    //         window.close();
+    //     }
+    //     if (m_event.type == sf::Event::KeyPressed)
+    //     {
+    //         keyPressed = true;
+    //         break;
+    //     }
+    // }
 }

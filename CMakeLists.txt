@@ -26,6 +26,8 @@ set(HEADERS ${HEADERS}
     ${PROJECT_SOURCE_DIR}/src/commands/moveDown.h
     ${PROJECT_SOURCE_DIR}/src/commands/moveUp.h
     ${PROJECT_SOURCE_DIR}/src/commands/moveBall.h
+    ${PROJECT_SOURCE_DIR}/src/commands/increaseSpeed.h
+    ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.h
 
     ${PROJECT_SOURCE_DIR}/src/gameObjects/component.h
     ${PROJECT_SOURCE_DIR}/src/gameObjects/gameObjectFactory.h
@@ -36,18 +38,20 @@ set(HEADERS ${HEADERS}
     ${PROJECT_SOURCE_DIR}/src/screens/gameScreen.h
     ${PROJECT_SOURCE_DIR}/src/screens/menuScreen.h
     ${PROJECT_SOURCE_DIR}/src/screens/screenManager.h
+    ${PROJECT_SOURCE_DIR}/src/screens/optionsScreen.h
 
     ${PROJECT_SOURCE_DIR}/src/gameEngine.h
-    ${PROJECT_SOURCE_DIR}/src/screenController.h
-    ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.h
+    ${PROJECT_SOURCE_DIR}/src/inputController.h
+
 )
 
 set(SOURCES ${SOURCES}
     ${PROJECT_SOURCE_DIR}/src/commands/moveDown.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/moveUp.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/moveBall.cpp
+    ${PROJECT_SOURCE_DIR}/src/commands/increaseSpeed.cpp
+    ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.cpp
 
-    ${PROJECT_SOURCE_DIR}/src/screenController.cpp
     ${PROJECT_SOURCE_DIR}/src/gameObjects/gameObjectFactory.cpp
     ${PROJECT_SOURCE_DIR}/src/gameObjects/paddle.cpp
     ${PROJECT_SOURCE_DIR}/src/gameObjects/ball.cpp
@@ -55,9 +59,10 @@ set(SOURCES ${SOURCES}
     ${PROJECT_SOURCE_DIR}/src/screens/gameScreen.cpp
     ${PROJECT_SOURCE_DIR}/src/screens/menuScreen.cpp
     ${PROJECT_SOURCE_DIR}/src/screens/screenManager.cpp
+    ${PROJECT_SOURCE_DIR}/src/screens/optionsScreen.cpp
 
     ${PROJECT_SOURCE_DIR}/src/gameEngine.cpp
-    ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/inputController.cpp
     ${PROJECT_SOURCE_DIR}/src/main.cpp
 )
 

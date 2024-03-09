@@ -9,24 +9,18 @@
 #include "commands/moveDown.h"
 #include "gameObjects/gameObjectFactory.h"
 
-#include "screenController.h"
+#include "inputController.h"
 
-class GameEngine {
-
+class GameEngine
+{
 public:
     GameEngine();
     void run();
-   // void menu();
 
 private:
     sf::RenderWindow m_window;
-    GameObjectFactory m_gameObjectFactory;
-    CommandHandler m_commandHandler;
-    std::unique_ptr<ScreenController> m_screenController;
-    std::unique_ptr<Paddle> m_paddle1, m_paddle2;
-    std::unique_ptr<Ball> m_ball;
+    std::unique_ptr<InputController> m_inputController;
 
-    //void handleCollision(sf::Sprite& ps1, sf::Sprite& ps2, sf::Sprite& pb);
     void setup();
     void setWindowPosition();
 };

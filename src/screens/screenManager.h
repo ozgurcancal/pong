@@ -8,13 +8,16 @@
 
 #include "gameScreen.h"
 #include "menuScreen.h"
+#include "optionsScreen.h"
 
 class ScreenManager
 {
 
 public:
     ScreenManager(sf::RenderWindow &window);
-    void switchScreen(const std::string &screenName, sf::RenderWindow &window);
+    void switchScreen(const std::string &screenName);
+    void handleInput(sf::RenderWindow &window);
+    void draw(sf::RenderWindow &window);
 
 private:
     std::map<std::string, std::unique_ptr<Screen>> m_screens;

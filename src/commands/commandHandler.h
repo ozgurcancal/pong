@@ -12,18 +12,20 @@
 
 #include <memory>
 
-enum class CommandType : int {
+enum class CommandType : int
+{
     MOVE = 1,
     MOVEUP = 2,
     MOVEDOWN = 3,
+    INCREASESPEED = 4,
+    DECREASESPEED = 5,
 };
 
-
-class CommandHandler {
+class CommandHandler
+{
 public:
-    std::unique_ptr<Command> createNew(CommandType group, Paddle* paddle);
-    std::unique_ptr<Command> createNew(CommandType group, Ball* ball);
-   
+    std::unique_ptr<Command> createNew(CommandType group, Paddle *paddle);
+    std::unique_ptr<Command> createNew(CommandType group, Ball *ball);
 };
 
 //  std::unique_ptr<Command> createNew(CommandType group, Component* ball);

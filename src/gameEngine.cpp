@@ -8,12 +8,13 @@
 #include <atomic>
 #include <chrono>
 
-
 using namespace std;
 
-GameEngine::GameEngine(): m_window(sf::VideoMode(800, 600), "Pong Game") {
+GameEngine::GameEngine() : m_window(sf::VideoMode(800, 600), "Pong Game")
+{
 
-    m_screenController = std::make_unique<ScreenController>(m_window);
+    m_inputController = std::make_unique<InputController>(m_window);
+    // m_screenManager = std::make_unique<ScreenManager>(m_window);
 }
 
 // the three main stages of the game loop
@@ -22,30 +23,27 @@ GameEngine::GameEngine(): m_window(sf::VideoMode(800, 600), "Pong Game") {
 //     UpdateGame();
 //     Draw();
 // }
-void GameEngine::run() {
-    std::cout<<"Gameengine::run\n";
+void GameEngine::run()
+{
+    std::cout << "Gameengine::run\n";
     setup();
-                
 
-   // m_screenController->menu(m_window);
-   ScreenManager screenManager(m_window);
+    while (m_window.isOpen())
+    {
 
-
-    while (m_window.isOpen()) {
-
-        m_screenController->updateScreen(m_window);
-        m_screenController->draw(m_window);
-
+        m_inputController->handleInput(m_window);
+        m_inputController->draw(m_window);
     }
 }
 
-void GameEngine::setup(){
-    std::cout<<"Gameengine in setup\n";
+void GameEngine::setup()
+{
+    std::cout << "Gameengine in setup\n";
     setWindowPosition();
-
 }
 
-void GameEngine::setWindowPosition(){
+void GameEngine::setWindowPosition()
+{
     // Get the desktop mode to access the screen resolution
     sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
 

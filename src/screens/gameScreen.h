@@ -20,9 +20,9 @@ class GameScreen : public Screen
     //     void draw(sf::RenderWindow& window) override;
 
 public:
-    GameScreen() = default;
-    void createScreen(sf::RenderWindow &window) override;
-    void updateScreen(sf::RenderWindow &window) override;
+    GameScreen(sf::RenderWindow &window);
+
+    void handleInput(sf::RenderWindow &window, std::string &currentScreen) override;
     void draw(sf::RenderWindow &window) override;
     void menu(sf::RenderWindow &window);
 
@@ -33,6 +33,7 @@ private:
     std::unique_ptr<Paddle> m_paddle1, m_paddle2;
     std::unique_ptr<Ball> m_ball;
 
+    void createScreen(sf::RenderWindow &window) override;
     void handleCollision(sf::Sprite &ps1, sf::Sprite &ps2, sf::Sprite &pb, sf::RenderWindow &window);
 
     template <typename T>

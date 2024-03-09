@@ -1,16 +1,17 @@
 
 
-#ifndef MENUSCREEN_H
-#define MENUSCREEN_H
+#ifndef OPTIONS_H
+#define OPTIONS_H
 
 #include "screen.h"
 
-class MenuScreen : public Screen
+class OptionsScreen : public Screen
 {
 
 public:
-    MenuScreen(sf::RenderWindow &window);
+    OptionsScreen(sf::RenderWindow &window);
 
+    // void handleOnput(sf::RenderWindow &window, std::function<void(std::any)> callBack) override;
     void handleInput(sf::RenderWindow &window, std::string &currentScreen) override;
     void draw(sf::RenderWindow &window) override;
 
@@ -22,4 +23,4 @@ private:
     sf::Font m_font;
 };
 
-#endif // MENUSCREEN_H
+#endif // OPTIONS_H
