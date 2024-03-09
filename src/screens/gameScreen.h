@@ -57,6 +57,7 @@ private:
 
     int m_ScoreX = 0;
     int m_ScoreY = 0;
+    std::vector<std::string> m_scores = {"0", "0"};
 };
 
 #endif // GAMESCREEN_H

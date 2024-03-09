@@ -10,6 +10,10 @@ GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle
     // createScreen(window);
 
     // skoru once ekrana
+    m_scoreItems.push_back(sf::Text("0", m_font));
+    m_scoreItems.push_back(sf::Text("0", m_font));
+    m_scoreItems[0].setPosition(470.f, 30.f);
+    m_scoreItems[1].setPosition(570.f, 30.f);
 }
 
 void GameScreen::refreshScreen(sf::RenderWindow &window)
@@ -17,7 +21,8 @@ void GameScreen::refreshScreen(sf::RenderWindow &window)
     // gameobjelerini ortaya yeniden pozisyonla
     // problem burada
     // m_ball->setPosition(window);
-    m_ball->g
+    // m_ball->g
+    m_ball->reset(window);
 }
 
 void GameScreen::handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback)
@@ -74,7 +79,9 @@ void GameScreen::draw(sf::RenderWindow &window)
     window.draw(m_paddle1->getSprite());
     window.draw(m_paddle2->getSprite());
     window.draw(m_ball->getSprite());
-    // drawScore(window);
+    // window.draw(m_scoreItems[0]);
+    // window.draw(m_scoreItems[1]);
+    drawScore(window);
     window.display();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(15));
@@ -87,13 +94,29 @@ void GameScreen::handleBallOffScreen(sf::RenderWindow &window)
     if (m_ball->getSprite().getPosition().x < 0)
     {
         m_ScoreY++;
+        refreshScreen(window);
     }
     else if (m_ball->getSprite().getPosition().x > 800)
     {
         m_ScoreX++;
+        refreshScreen(window);
     }
 
-    refreshScreen(window);
+    m_scores[0] = std::to_string(m_ScoreX);
+    m_scores[1] = std::to_string(m_ScoreY);
+    sf::Text item;
+
+    for (int i = 0; i < m_scores.size(); ++i)
+    {
+        item.setFont(m_font);
+        item.setString(m_scores[i]);
+        item.setCharacterSize(50);
+        item.setFillColor(sf::Color::White);
+        item.setPosition(370.f + 100 * i, 30.f);
+        m_scoreItems[i] = item;
+        // m_scoreItems.clear();
+        // m_scoreItems.push_back(item);
+    }
 }
 
 void GameScreen::handleScore()
@@ -115,19 +138,19 @@ void GameScreen::handleScore()
 
     std::vector<std::string> scores = {"0", "0"};
     scores[0] = std::to_string(m_ScoreX);
-    // scores[1] = std::to_string(m_ScoreY);
+    scores[1] = std::to_string(m_ScoreY);
     sf::Text item;
 
     std::string str = scores[0];
-    // for (int i = 0; i < scores.size(); ++i)
-    // {
-    item.setFont(m_font);
-    item.setString(str);
-    item.setCharacterSize(50);
-    item.setFillColor(sf::Color::White);
-    item.setPosition(470.f, 30.f);
-    m_scoreItems.push_back(item);
-    // }
+    for (int i = 0; i < scores.size(); ++i)
+    {
+        item.setFont(m_font);
+        item.setString(str);
+        item.setCharacterSize(50);
+        item.setFillColor(sf::Color::White);
+        item.setPosition(470.f, 30.f);
+        m_scoreItems.push_back(item);
+    }
 }
 
 void GameScreen::drawScore(sf::RenderWindow &window)
@@ -136,8 +159,6 @@ void GameScreen::drawScore(sf::RenderWindow &window)
     for (auto &item : m_scoreItems)
     {
         window.draw(item);
-        // window.display();
-        //  window.clear();
     }
 }
 
