@@ -5,6 +5,7 @@
 
 #include "screen.h"
 #include "commandHandler.h"
+#include <map>
 // #include "component.h"
 
 class OptionsScreen : public Screen
@@ -16,7 +17,9 @@ public:
 
 private:
     sf::Event m_event;
-    std::vector<sf::Text> m_menuItems;
+    // std::vector<sf::Text> m_menuItems;
+    // std::map<std::string, sf::Vector2f> m_itemPositions;
+    std::map<std::string, std::pair<sf::Text, sf::Vector2f>> m_menuItems;
 
     std::shared_ptr<CommandHandler> m_commandHandler;
     std::shared_ptr<Paddle> m_paddle1, m_paddle2;
@@ -33,6 +36,10 @@ private:
             throw std::invalid_argument("Command is null");
         }
     }
+
+    void highlightMenuItem(float x, float y);
+    // Create a circle shape to act as the marker
+    sf::CircleShape m_marker; // 10 is the radius of the circle
 };
 
 #endif // OPTIONSSCREEN_H
