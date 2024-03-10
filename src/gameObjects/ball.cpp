@@ -26,7 +26,7 @@ Ball::Ball(sf::Texture &texture)
     static std::random_device rd;                             // Obtain a random number from hardware
     static std::mt19937 eng(rd());                            // Seed the generator
     static std::uniform_real_distribution<> distr(-1.0, 1.0); // Define range
-                                                              // Constant speed for the ball
+
     // Ensure the ball does not move vertically or horizontally
     do
     {

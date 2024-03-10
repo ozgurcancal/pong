@@ -7,6 +7,8 @@ if (BUILD_STATIC)
     set(SFML_STATIC_LIBRARIES TRUE)
 endif()
 
+# Copy assets directory to build directory
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 find_package( SFML 2.5.1 REQUIRED COMPONENTS graphics)
 
 if(SFML_FOUND)
@@ -28,6 +30,7 @@ set(HEADERS ${HEADERS}
     ${PROJECT_SOURCE_DIR}/src/commands/moveBall.h
     ${PROJECT_SOURCE_DIR}/src/commands/setSpeed.h
     ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.h
+    ${PROJECT_SOURCE_DIR}/src/commands/setDifficulty.h
 
     ${PROJECT_SOURCE_DIR}/src/gameObjects/component.h
     ${PROJECT_SOURCE_DIR}/src/gameObjects/gameObjectFactory.h
@@ -52,6 +55,7 @@ set(SOURCES ${SOURCES}
     ${PROJECT_SOURCE_DIR}/src/commands/moveBall.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/setSpeed.cpp
     ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.cpp
+    ${PROJECT_SOURCE_DIR}/src/commands/setDifficulty.cpp
 
     ${PROJECT_SOURCE_DIR}/src/gameObjects/gameObjectFactory.cpp
     ${PROJECT_SOURCE_DIR}/src/gameObjects/paddle.cpp

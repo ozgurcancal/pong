@@ -22,7 +22,7 @@ void MenuScreen::refreshScreen(sf::RenderWindow &window)
 
     // std::vector<sf::Text> menuItems;
 
-    std::vector<std::string> titles = {"1- Start", "2- Options", "3- Exit"};
+    std::vector<std::string> titles = {"1- Single Player", "2- Multiplayer", "3- Options"};
     sf::Text item;
     for (int i = 0; i < titles.size(); ++i)
     {
