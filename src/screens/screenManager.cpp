@@ -20,15 +20,12 @@ ScreenManager::ScreenManager(sf::RenderWindow &window)
     m_screens["MenuScreen"] = std::make_unique<MenuScreen>(window);
     m_screens["OptionsScreen"] = std::make_unique<OptionsScreen>(window, m_paddle1, m_paddle2, m_ball, m_commandHandler);
     m_screens["GameScreen"] = std::make_unique<GameScreen>(window, m_paddle1, m_paddle2, m_ball, m_commandHandler);
+    m_screens["GameOverScreen"] = std::make_unique<GameOverScreen>(window);
 
     m_currentScreen = "MenuScreen";
-    // to do game objesini her seferinde yeniden initialize etmen lazim
-
     m_screens[m_currentScreen]->draw(window);
-    // m_Screens["GameOverScreen"] = std::make_unique<GameOverScreen>();
 }
 
-// make use or remove
 void ScreenManager::switchScreen(const std::string &screenName)
 {
     m_currentScreen = screenName;
@@ -37,7 +34,7 @@ void ScreenManager::switchScreen(const std::string &screenName)
 
 void ScreenManager::handleInput(sf::RenderWindow &window)
 {
-    // buraya callback koyabilirsin
+    // to do callback i private member yap
     auto callback = [this](const std::string &screenName)
     { this->switchScreen(screenName); };
     m_screens[m_currentScreen]->handleInput(window, callback);

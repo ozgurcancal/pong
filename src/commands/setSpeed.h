@@ -6,7 +6,6 @@
 #include "command.h"
 #include "ball.h"
 #include "paddle.h"
-// #include "component.h"
 
 #include <memory>
 

@@ -32,6 +32,8 @@ public:
 private:
     sf::Sprite m_sprite;
     float m_velocity = 10.0f;
+    const float m_initialSpeed = 20.0f; // Initial speed of the paddle
+    const float m_margin = 30.0f;       // Margin from the window edge
 };
 
 #endif // PADDLE_H

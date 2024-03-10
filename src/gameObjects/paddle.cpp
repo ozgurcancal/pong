@@ -48,22 +48,18 @@ sf::Sprite &Paddle::getSprite()
 void Paddle::moveUp()
 {
     m_sprite.move(0, -m_velocity);
-    //  m_sprite.move(0, -20); // Negative y value to move up
     std::cout << "Paddle moved up" << std::endl;
-    // collision_flag = true;
 }
 
 void Paddle::moveDown()
 {
     m_sprite.move(0, m_velocity);
-    //  m_sprite.move(0, 20); // Negative y value to move up
     std::cout << "Paddle moved down" << std::endl;
-    // Execute move down command
 }
 
 void Paddle::setSpeed(float inSpeed)
 {
-    m_velocity = inSpeed * 20.0f;
+    m_velocity = inSpeed * m_initialSpeed;
 }
 
 sf::Vector2f Paddle::getPosition() const
@@ -74,13 +70,10 @@ sf::Vector2f Paddle::getPosition() const
 void Paddle::setPosition(const sf::RenderWindow &window, PaddlePosition position)
 {
     // Set the position of the paddle to either the left or right side of the screen
-    // sf::VideoMode desktop = sf::VideoMode::getDesktopMode();
     if (position == PaddlePosition::Left)
     {
-        float margin = 30.0f; // Margin from the left edge of the window
-
         // The x position is the margin from the left edge
-        float posX = margin;
+        float posX = m_margin;
 
         // Center the sprite vertically within the window
         float posY = (window.getSize().y / 2.0f) - (m_sprite.getLocalBounds().height / 2.0f);
@@ -89,8 +82,8 @@ void Paddle::setPosition(const sf::RenderWindow &window, PaddlePosition position
     }
     else if (position == PaddlePosition::Right)
     {
-        float margin = 30.0f;                                                       // Margin from the right edge of the window
-        float posX = window.getSize().x - m_sprite.getLocalBounds().width - margin; // Adjust posX for the right paddle
+        // Adjust posX for the right paddle
+        float posX = window.getSize().x - m_sprite.getLocalBounds().width - m_margin;
 
         // Center the sprite vertically within the window
         float posY = (window.getSize().y / 2.0f) - (m_sprite.getLocalBounds().height / 2.0f);

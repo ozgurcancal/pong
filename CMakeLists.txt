@@ -39,6 +39,7 @@ set(HEADERS ${HEADERS}
     ${PROJECT_SOURCE_DIR}/src/screens/menuScreen.h
     ${PROJECT_SOURCE_DIR}/src/screens/screenManager.h
     ${PROJECT_SOURCE_DIR}/src/screens/optionsScreen.h
+    ${PROJECT_SOURCE_DIR}/src/screens/gameOverScreen.h
 
     ${PROJECT_SOURCE_DIR}/src/gameEngine.h
     ${PROJECT_SOURCE_DIR}/src/inputController.h
@@ -60,6 +61,7 @@ set(SOURCES ${SOURCES}
     ${PROJECT_SOURCE_DIR}/src/screens/menuScreen.cpp
     ${PROJECT_SOURCE_DIR}/src/screens/screenManager.cpp
     ${PROJECT_SOURCE_DIR}/src/screens/optionsScreen.cpp
+    ${PROJECT_SOURCE_DIR}/src/screens/gameOverScreen.cpp
 
     ${PROJECT_SOURCE_DIR}/src/gameEngine.cpp
     ${PROJECT_SOURCE_DIR}/src/inputController.cpp

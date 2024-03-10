@@ -19,33 +19,13 @@ Ball::Ball(sf::Texture &texture)
     // // to do
     // //  Seed the random number generator with the time
     // // srand((int)time(0));
-    // //  Initialize random engine and distribution once
-    // static std::random_device rd;                             // Obtain a random number from hardware
-    // static std::mt19937 eng(rd());                            // Seed the generator
-    // static std::uniform_real_distribution<> distr(-1.0, 1.0); // Define range
-    // float initialSpeed = 1.0f;                                // Constant speed for the ball
-    // // Ensure the ball does not move vertically or horizontally
-    // do
-    // {
-    //     m_velocityX = distr(eng);
-    //     m_velocityY = distr(eng);
-    // } while (m_velocityX == 0 || m_velocityY == 0);
-
-    // // Normalize the direction vector
-    // float length = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY);
-    // m_velocityX /= length;
-    // m_velocityY /= length;
-
-    // // Apply the constant speed to the direction
-    // m_velocityX = m_velocityX * initialSpeed;
-    // m_velocityY = m_velocityY * initialSpeed;
 
     m_sprite.setTexture(texture);
 
     static std::random_device rd;                             // Obtain a random number from hardware
     static std::mt19937 eng(rd());                            // Seed the generator
     static std::uniform_real_distribution<> distr(-1.0, 1.0); // Define range
-    float initialSpeed = 1.0f;                                // Constant speed for the ball
+                                                              // Constant speed for the ball
     // Ensure the ball does not move vertically or horizontally
     do
     {
@@ -59,17 +39,17 @@ Ball::Ball(sf::Texture &texture)
     m_velocityY /= length;
 
     // Apply the constant speed to the direction
-    m_velocityX = m_velocityX * initialSpeed;
-    m_velocityY = m_velocityY * initialSpeed;
+    m_velocityX = m_velocityX * m_initialSpeed;
+    m_velocityY = m_velocityY * m_initialSpeed;
 }
 
 void Ball::reset(const sf::RenderWindow &window)
 {
 
-    static std::random_device rd;                                                          // Obtain a random number from hardware
-    static std::mt19937 eng(rd());                                                         // Seed the generator
-    static std::uniform_real_distribution<> distr(-1.0, 1.0);                              // Define range
-    float initialSpeed = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY); // Constant speed for the ball
+    static std::random_device rd;                                                       // Obtain a random number from hardware
+    static std::mt19937 eng(rd());                                                      // Seed the generator
+    static std::uniform_real_distribution<> distr(-1.0, 1.0);                           // Define range
+    float prevSpeed = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY); // Constant speed for the ball
     // Ensure the ball does not move vertically or horizontally
     do
     {
@@ -83,8 +63,8 @@ void Ball::reset(const sf::RenderWindow &window)
     m_velocityY /= length;
 
     // Apply the constant speed to the direction
-    m_velocityX = m_velocityX * initialSpeed;
-    m_velocityY = m_velocityY * initialSpeed;
+    m_velocityX = m_velocityX * prevSpeed;
+    m_velocityY = m_velocityY * prevSpeed;
 
     setPosition(window);
 }
@@ -116,7 +96,7 @@ void Ball::move()
     {
         m_velocityY = -m_velocityY; // Reverse vertical velocity
     }
-    // random move
+
     m_sprite.move(m_velocityX, m_velocityY);
     std::cout << "Ball moved" << std::endl;
 }
@@ -136,4 +116,14 @@ void Ball::setVelocityX(float velocityX)
 void Ball::setVelocityY(float velocityY)
 {
     m_velocityY = velocityY;
+}
+
+float Ball::getVelocityX() const
+{
+    return m_velocityX;
+}
+
+float Ball::getVelocityY() const
+{
+    return m_velocityY;
 }

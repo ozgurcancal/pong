@@ -1,15 +1,15 @@
 
 
-#ifndef MENUSCREEN_H
-#define MENUSCREEN_H
+#ifndef GAMEOVERSCREEN_H
+#define GAMEOVERSCREEN_H
 
 #include "screen.h"
 
-class MenuScreen : public Screen
+class GameOverScreen : public Screen
 {
 
 public:
-    MenuScreen(sf::RenderWindow &window);
+    GameOverScreen(sf::RenderWindow &window);
 
     void refreshScreen(sf::RenderWindow &window) override;
     void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) override;
@@ -20,4 +20,4 @@ private:
     std::vector<sf::Text> m_menuItems;
 };
 
-#endif // MENUSCREEN_H
+#endif // GAMEOVERSCREEN_H

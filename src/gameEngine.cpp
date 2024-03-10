@@ -12,9 +12,7 @@ using namespace std;
 
 GameEngine::GameEngine() : m_window(sf::VideoMode(800, 600), "Pong Game")
 {
-
     m_inputController = std::make_unique<InputController>(m_window);
-    // m_screenManager = std::make_unique<ScreenManager>(m_window);
 }
 
 // the three main stages of the game loop
@@ -30,7 +28,6 @@ void GameEngine::run()
 
     while (m_window.isOpen())
     {
-
         m_inputController->handleInput(m_window);
         m_inputController->draw(m_window);
     }

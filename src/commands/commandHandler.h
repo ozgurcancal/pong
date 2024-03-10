@@ -29,6 +29,4 @@ public:
     std::unique_ptr<Command> createNew(CommandType group, float inSpeed, Ball *ball, Paddle *paddle1, Paddle *paddle2);
 };
 
-//  std::unique_ptr<Command> createNew(CommandType group, Component* ball);
-
 #endif // COMMANDHANDLER_H

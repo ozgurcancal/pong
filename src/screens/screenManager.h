@@ -10,6 +10,7 @@
 #include "menuScreen.h"
 #include "optionsScreen.h"
 #include "gameObjectFactory.h"
+#include "gameOverScreen.h"
 #include <functional>
 
 class ScreenManager

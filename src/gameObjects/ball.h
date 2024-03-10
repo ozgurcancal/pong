@@ -20,11 +20,14 @@ public:
     void move();
     void setSpeed(float inSpeed);
     sf::Sprite &getSprite();
+    float getVelocityX() const;
+    float getVelocityY() const;
 
 private:
     sf::Sprite m_sprite;
     float m_velocityX;
     float m_velocityY;
+    const float m_initialSpeed = 2.0f; // Initial speed of the ball
 };
 
 #endif // BALL_H

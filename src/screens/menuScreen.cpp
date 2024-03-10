@@ -7,20 +7,12 @@
 
 MenuScreen::MenuScreen(sf::RenderWindow &window)
 {
-    // uniq
     refreshScreen(window);
 }
 
 void MenuScreen::refreshScreen(sf::RenderWindow &window)
 {
     std::cout << "in MenuScreen::init\n";
-
-    // sf::Font font;
-    // if (!m_font.loadFromFile("sprites/GreatVibes.otf"))
-    // {
-    //     throw std::invalid_argument("Failed to load font");
-    //     std::cout << "Failed to load font" << std::endl;
-    // }
     sf::Text text;
     text.setFont(m_font); // Set the font
 
@@ -28,15 +20,12 @@ void MenuScreen::refreshScreen(sf::RenderWindow &window)
     text.setFillColor(sf::Color::White); // Set the text color
     text.setPosition(300, 400);          // Set the position of the text in the window
 
-    // menu
-
     // std::vector<sf::Text> menuItems;
 
-    std::vector<std::string> titles = {"Start", "Options", "Exit"};
+    std::vector<std::string> titles = {"1- Start", "2- Options", "3- Exit"};
     sf::Text item;
     for (int i = 0; i < titles.size(); ++i)
     {
-
         item.setFont(m_font);
         item.setString(titles[i]);
         item.setCharacterSize(30);
@@ -46,7 +35,7 @@ void MenuScreen::refreshScreen(sf::RenderWindow &window)
     }
 
     item.setFont(m_font);
-    item.setString("press any key to continue");
+    item.setString("press any esc to exit");
     item.setPosition(250.f, 500.f); // Adjust as needed
     m_menuItems.push_back(item);
 }
