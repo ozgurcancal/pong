@@ -81,27 +81,36 @@ void GameScreen::draw(sf::RenderWindow &window)
 
 void GameScreen::handleBallOffScreen(sf::RenderWindow &window, std::function<void(const std::string &)> &switchScreenCallback)
 {
+    std::cout << "in handleBallOffScreen\n";
     if (m_ball->getSprite().getPosition().x < 0)
     {
         m_ScoreY++;
+        std::cout << "before refresh\n";
         refreshScreen(window);
     }
     else if (m_ball->getSprite().getPosition().x > 800)
     {
         m_ScoreX++;
+        std::cout << "before refresh\n";
         refreshScreen(window);
     }
     else if (m_ScoreX == 5 || m_ScoreY == 5)
     {
         m_ScoreX = 0;
         m_ScoreY = 0;
+        std::cout << "before callback\n";
         switchScreenCallback("GameOverScreen");
     }
-
+    // m_scoreItems.push_back(sf::Text("0", m_font));
+    // m_scoreItems.push_back(sf::Text("0", m_font));
+    // m_scoreItems[0].setPosition(470.f, 30.f);
+    // m_scoreItems[1].setPosition(570.f, 30.f);
+    std::cout << "in handleBallOffScreen2\n";
     m_scores[0] = std::to_string(m_ScoreX);
     m_scores[1] = std::to_string(m_ScoreY);
     sf::Text item;
 
+    std::cout << "m_scores.size() = " << m_scores.size() << "\n";
     for (int i = 0; i < m_scores.size(); ++i)
     {
         item.setFont(m_font);
@@ -111,6 +120,7 @@ void GameScreen::handleBallOffScreen(sf::RenderWindow &window, std::function<voi
         item.setPosition(window.getSize().x / 2 - 75 + (150 * i), 30.f);
         m_scoreItems[i] = item;
     }
+    std::cout << "in handleBallOffScreen3\n";
 }
 
 void GameScreen::drawScore(sf::RenderWindow &window)

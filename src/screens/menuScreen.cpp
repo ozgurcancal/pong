@@ -57,7 +57,13 @@ void MenuScreen::handleInput(sf::RenderWindow &window, std::function<void(const 
             if (m_event.key.code == sf::Keyboard::Num1)
             {
 
-                switchScreenCallback("GameScreen");
+                switchScreenCallback("SinglePlayerScreen");
+                break;
+            }
+            if (m_event.key.code == sf::Keyboard::Num2)
+            {
+                // switch screen
+                switchScreenCallback("MultiPlayerScreen");
                 break;
             }
             if (m_event.key.code == sf::Keyboard::Num2)

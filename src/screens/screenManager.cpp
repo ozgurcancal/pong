@@ -19,7 +19,9 @@ ScreenManager::ScreenManager(sf::RenderWindow &window)
 
     m_screens["MenuScreen"] = std::make_unique<MenuScreen>(window);
     m_screens["OptionsScreen"] = std::make_unique<OptionsScreen>(window, m_paddle1, m_paddle2, m_ball, m_commandHandler);
-    m_screens["GameScreen"] = std::make_unique<GameScreen>(window, m_paddle1, m_paddle2, m_ball, m_commandHandler);
+    // m_screens["GameScreen"] = std::make_unique<GameScreen>(window, m_paddle1, m_paddle2, m_ball, m_commandHandler);
+    m_screens["SinglePlayerScreen"] = std::make_unique<SinglePlayerScreen>(window, m_paddle1, m_paddle2, m_ball, m_commandHandler);
+    m_screens["MultiPlayerScreen"] = std::make_unique<MultiPlayerScreen>(window, m_paddle1, m_paddle2, m_ball, m_commandHandler);
     m_screens["GameOverScreen"] = std::make_unique<GameOverScreen>(window);
 
     m_currentScreen = "MenuScreen";

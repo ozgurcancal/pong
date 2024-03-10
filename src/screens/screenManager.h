@@ -11,6 +11,8 @@
 #include "optionsScreen.h"
 #include "gameObjectFactory.h"
 #include "gameOverScreen.h"
+#include "singlePlayerScreen.h"
+#include "multiPlayerScreen.h"
 #include <functional>
 
 class ScreenManager

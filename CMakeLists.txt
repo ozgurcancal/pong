@@ -39,6 +39,8 @@ set(HEADERS ${HEADERS}
 
     ${PROJECT_SOURCE_DIR}/src/screens/screen.h
     ${PROJECT_SOURCE_DIR}/src/screens/gameScreen.h
+    ${PROJECT_SOURCE_DIR}/src/screens/singlePlayerScreen.h
+    ${PROJECT_SOURCE_DIR}/src/screens/multiPlayerScreen.h
     ${PROJECT_SOURCE_DIR}/src/screens/menuScreen.h
     ${PROJECT_SOURCE_DIR}/src/screens/screenManager.h
     ${PROJECT_SOURCE_DIR}/src/screens/optionsScreen.h
@@ -62,6 +64,8 @@ set(SOURCES ${SOURCES}
     ${PROJECT_SOURCE_DIR}/src/gameObjects/ball.cpp
 
     ${PROJECT_SOURCE_DIR}/src/screens/gameScreen.cpp
+    ${PROJECT_SOURCE_DIR}/src/screens/singlePlayerScreen.cpp
+    ${PROJECT_SOURCE_DIR}/src/screens/multiPlayerScreen.cpp
     ${PROJECT_SOURCE_DIR}/src/screens/menuScreen.cpp
     ${PROJECT_SOURCE_DIR}/src/screens/screenManager.cpp
     ${PROJECT_SOURCE_DIR}/src/screens/optionsScreen.cpp
