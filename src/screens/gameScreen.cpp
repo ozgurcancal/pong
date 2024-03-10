@@ -7,9 +7,7 @@
 GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball, std::shared_ptr<CommandHandler> &commendHandler) : m_paddle1(paddle1.get()), m_paddle2(paddle2.get()), m_ball(ball.get()), m_commandHandler(commendHandler.get())
 {
     std::cout << "in gameScreen constructor\n";
-    // createScreen(window);
 
-    // skoru once ekrana
     m_scoreItems.push_back(sf::Text("0", m_font));
     m_scoreItems.push_back(sf::Text("0", m_font));
     m_scoreItems[0].setPosition(470.f, 30.f);
@@ -18,10 +16,6 @@ GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle
 
 void GameScreen::refreshScreen(sf::RenderWindow &window)
 {
-    // gameobjelerini ortaya yeniden pozisyonla
-    // problem burada
-    // m_ball->setPosition(window);
-    // m_ball->g
     m_ball->reset(window);
 }
 

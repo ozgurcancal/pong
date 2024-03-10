@@ -78,7 +78,6 @@ void MenuScreen::draw(sf::RenderWindow &window)
 {
 
     std::cout << "in MenuScreen::draw\n";
-    // Clear the window
     window.clear();
 
     // Draw menu items
@@ -87,6 +86,5 @@ void MenuScreen::draw(sf::RenderWindow &window)
         window.draw(item);
     }
 
-    // Display the contents of the window
     window.display();
 }

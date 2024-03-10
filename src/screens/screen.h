@@ -14,7 +14,7 @@ class Screen
 public:
     Screen()
     {
-        loadFont("sprites/GreatVibes.otf"); // Specify the default font path
+        loadFont("assets/GreatVibes.otf"); // Specify the default font path
     }
     virtual void refreshScreen(sf::RenderWindow &window) = 0;
     virtual void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) = 0;

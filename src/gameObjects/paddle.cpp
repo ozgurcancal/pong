@@ -8,7 +8,7 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
     if (type == PaddleType::Blue)
     {
         // Load the paddle texture from file
-        if (!paddleTexture.loadFromFile("sprites/paddle1.png"))
+        if (!paddleTexture.loadFromFile("assets/paddle1.png"))
         {
             std::cerr << "Failed to load paddle texture" << std::endl;
             throw "Failed to load paddle texture";
@@ -16,12 +16,13 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
         else
         {
             std::cout << "Paddle texture1 loaded" << std::endl;
+            m_sprite.setScale(0.5, 0.5);
         }
     }
     else if (type == PaddleType::Red)
     {
         // Load the paddle texture from file
-        if (!paddleTexture.loadFromFile("sprites/paddle2.png"))
+        if (!paddleTexture.loadFromFile("assets/paddle2.png"))
         {
             std::cerr << "Failed to load paddle texture" << std::endl;
             throw "Failed to load paddle texture";
@@ -29,6 +30,7 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
         else
         {
             std::cout << "Paddle texture2 loaded" << std::endl;
+            m_sprite.setScale(0.5, 0.5);
         }
     }
     else

@@ -40,9 +40,11 @@ void GameOverScreen::handleInput(sf::RenderWindow &window, std::function<void(co
 void GameOverScreen::draw(sf::RenderWindow &window)
 {
     window.clear();
+
     for (auto &item : m_menuItems)
     {
         window.draw(item);
     }
+
     window.display();
 }

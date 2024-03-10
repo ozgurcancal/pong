@@ -7,7 +7,7 @@
 Ball::Ball(sf::Texture &texture)
 {
     // Load the paddle texture from file
-    if (!texture.loadFromFile("sprites/ball.png"))
+    if (!texture.loadFromFile("assets/ball.png"))
     {
         std::cerr << "Failed to load ball texture" << std::endl;
         throw "Failed to load ball texture";
@@ -31,7 +31,7 @@ Ball::Ball(sf::Texture &texture)
     {
         m_velocityX = distr(eng);
         m_velocityY = distr(eng);
-    } while (m_velocityX == 0 || m_velocityY == 0);
+    } while (m_velocityX < 0.3);
 
     // Normalize the direction vector
     float length = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY);
@@ -55,7 +55,7 @@ void Ball::reset(const sf::RenderWindow &window)
     {
         m_velocityX = distr(eng);
         m_velocityY = distr(eng);
-    } while (m_velocityX == 0 || m_velocityY == 0);
+    } while (m_velocityX < 0.3);
 
     // Normalize the direction vector
     float length = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY);
