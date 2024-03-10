@@ -75,7 +75,7 @@ void GameScreen::draw(sf::RenderWindow &window)
     drawScore(window);
     window.display();
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(15));
+    std::this_thread::sleep_for(std::chrono::milliseconds(5));
     handleCollision(m_paddle1->getSprite(), m_paddle2->getSprite(), m_ball->getSprite(), window);
 }
 

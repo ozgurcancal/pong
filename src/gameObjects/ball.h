@@ -3,9 +3,6 @@
 #define BALL_H
 
 #include <SFML/Graphics.hpp>
-#include <random>
-
-// #include "component.h"
 
 class Ball
 {
@@ -28,7 +25,7 @@ private:
     sf::Sprite m_sprite;
     float m_velocityX;
     float m_velocityY;
-    static constexpr float INITIAL_SPEED = 2.0f; // Initial speed of the ball
+    static constexpr float INITIAL_SPEED = 1.0f; // Initial speed of the ball
     static constexpr float INITIAL_BALL_SIZE = 0.8f;
 };
 

@@ -1,7 +1,9 @@
 
 
 #include "ball.h"
-
+#include <cstdlib>
+#include <ctime>
+#include <cmath>
 #include <iostream> // std::cout icin eklendi
 
 Ball::Ball(sf::Texture &texture)
@@ -16,23 +18,20 @@ Ball::Ball(sf::Texture &texture)
     {
         std::cout << "Paddle ball loaded" << std::endl;
     }
-    // // to do
-    // //  Seed the random number generator with the time
-    // // srand((int)time(0));
 
     m_sprite.setTexture(texture);
     m_sprite.setScale(INITIAL_BALL_SIZE, INITIAL_BALL_SIZE);
 
-    static std::random_device rd;                             // Obtain a random number from hardware
-    static std::mt19937 eng(rd());                            // Seed the generator
-    static std::uniform_real_distribution<> distr(-1.0, 1.0); // Define range
+    // Seed the random number generator with the current time
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
-    // Ensure the ball does not move vertically or horizontally
+    // Ensure the ball does not move vertically
     do
     {
-        m_velocityX = distr(eng);
-        m_velocityY = distr(eng);
-    } while (m_velocityX < 0.3);
+        // Generate random value between -1.0 and 1.0
+        m_velocityX = static_cast<float>(std::rand()) / RAND_MAX * 2.0 - 1.0;
+        m_velocityY = static_cast<float>(std::rand()) / RAND_MAX * 2.0 - 1.0;
+    } while (m_velocityX < 0.3f && m_velocityX > -0.3f);
 
     // Normalize the direction vector
     float length = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY);
@@ -46,17 +45,8 @@ Ball::Ball(sf::Texture &texture)
 
 void Ball::reset(const sf::RenderWindow &window)
 {
-
-    static std::random_device rd;                                                       // Obtain a random number from hardware
-    static std::mt19937 eng(rd());                                                      // Seed the generator
-    static std::uniform_real_distribution<> distr(-1.0, 1.0);                           // Define range
+    // Define range
     float prevSpeed = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY); // Constant speed for the ball
-    // Ensure the ball does not move vertically or horizontally
-    do
-    {
-        m_velocityX = distr(eng);
-        m_velocityY = distr(eng);
-    } while (m_velocityX < 0.3);
 
     // Normalize the direction vector
     float length = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY);
