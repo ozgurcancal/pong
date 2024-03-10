@@ -16,7 +16,7 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
         else
         {
             std::cout << "Paddle texture1 loaded" << std::endl;
-            m_sprite.setScale(0.5, 0.5);
+            m_sprite.setScale(INITIAL_PADDLE_SIZE, INITIAL_PADDLE_SIZE);
         }
     }
     else if (type == PaddleType::Red)
@@ -30,7 +30,7 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
         else
         {
             std::cout << "Paddle texture2 loaded" << std::endl;
-            m_sprite.setScale(0.5, 0.5);
+            m_sprite.setScale(INITIAL_PADDLE_SIZE, INITIAL_PADDLE_SIZE);
         }
     }
     else
@@ -59,9 +59,31 @@ void Paddle::moveDown()
     std::cout << "Paddle moved down" << std::endl;
 }
 
-void Paddle::setSpeed(float inSpeed)
+void Paddle::setSpeed(int inSpeed)
 {
-    m_velocity = inSpeed * m_initialSpeed;
+    m_velocity = inSpeed * INITIAL_SPEED;
+}
+
+void Paddle::setDifficulty(int inDifficulty)
+{
+    // reset size of paddle
+    if (inDifficulty == 1)
+    {
+        m_sprite.setScale(INITIAL_PADDLE_SIZE * 2, INITIAL_PADDLE_SIZE * 2);
+    }
+    else if (inDifficulty == 2)
+    {
+        m_sprite.setScale(INITIAL_PADDLE_SIZE, INITIAL_PADDLE_SIZE);
+    }
+    else if (inDifficulty == 3)
+    {
+        m_sprite.setScale(INITIAL_PADDLE_SIZE / 2, INITIAL_PADDLE_SIZE / 2);
+    }
+    else
+    {
+        std::cerr << "Invalid difficulty" << std::endl;
+        throw "Invalid difficulty";
+    }
 }
 
 sf::Vector2f Paddle::getPosition() const
@@ -75,7 +97,7 @@ void Paddle::setPosition(const sf::RenderWindow &window, PaddlePosition position
     if (position == PaddlePosition::Left)
     {
         // The x position is the margin from the left edge
-        float posX = m_margin;
+        float posX = MARGIN;
 
         // Center the sprite vertically within the window
         float posY = (window.getSize().y / 2.0f) - (m_sprite.getLocalBounds().height / 2.0f);
@@ -85,7 +107,7 @@ void Paddle::setPosition(const sf::RenderWindow &window, PaddlePosition position
     else if (position == PaddlePosition::Right)
     {
         // Adjust posX for the right paddle
-        float posX = window.getSize().x - m_sprite.getLocalBounds().width - m_margin;
+        float posX = window.getSize().x - m_sprite.getLocalBounds().width - MARGIN;
 
         // Center the sprite vertically within the window
         float posY = (window.getSize().y / 2.0f) - (m_sprite.getLocalBounds().height / 2.0f);

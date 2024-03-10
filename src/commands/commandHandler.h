@@ -6,6 +6,7 @@
 #include "moveDown.h"
 #include "moveBall.h"
 #include "setSpeed.h"
+#include "setDifficulty.h"
 
 #include "component.h"
 #include "paddle.h"
@@ -19,6 +20,7 @@ enum class CommandType : int
     MOVEUP = 2,
     MOVEDOWN = 3,
     SETSPEED = 4,
+    SETDIFFICULTY = 5
 };
 
 class CommandHandler
@@ -26,7 +28,7 @@ class CommandHandler
 public:
     std::unique_ptr<Command> createNew(CommandType group, Paddle *paddle);
     std::unique_ptr<Command> createNew(CommandType group, Ball *ball);
-    std::unique_ptr<Command> createNew(CommandType group, float inSpeed, Ball *ball, Paddle *paddle1, Paddle *paddle2);
+    std::unique_ptr<Command> createNew(CommandType group, int input, Ball *ball, Paddle *paddle1, Paddle *paddle2);
 };
 
 #endif // COMMANDHANDLER_H

@@ -46,6 +46,9 @@ private:
     int m_ScoreX = 0;
     int m_ScoreY = 0;
     std::vector<std::string> m_scores = {"0", "0"};
+    static constexpr float BOUNDRY_TOP = 0;
+    static constexpr float BOUNDRY_BOTTOM = 600;
+    static constexpr float MOVE_DISTANCE = 20;
 };
 
 #endif // GAMESCREEN_H

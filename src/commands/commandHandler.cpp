@@ -39,7 +39,7 @@ std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Ball *ba
     return nullptr;
 }
 
-std::unique_ptr<Command> CommandHandler::createNew(CommandType command, float inSpeed, Ball *ball, Paddle *paddle1, Paddle *paddle2)
+std::unique_ptr<Command> CommandHandler::createNew(CommandType command, int input, Ball *ball, Paddle *paddle1, Paddle *paddle2)
 {
     if (ball == nullptr || paddle1 == nullptr || paddle2 == nullptr)
     {
@@ -49,7 +49,9 @@ std::unique_ptr<Command> CommandHandler::createNew(CommandType command, float in
     switch (command)
     {
     case CommandType::SETSPEED:
-        return std::unique_ptr<Command>(new SetSpeed(inSpeed, ball, paddle1, paddle2));
+        return std::unique_ptr<Command>(new SetSpeed(input, ball, paddle1, paddle2));
+    case CommandType::SETDIFFICULTY:
+        return std::unique_ptr<Command>(new SetDifficulty(input, ball, paddle1, paddle2));
     }
 
     return nullptr;

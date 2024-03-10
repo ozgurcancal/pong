@@ -17,8 +17,6 @@ public:
 
 private:
     sf::Event m_event;
-    // std::vector<sf::Text> m_menuItems;
-    // std::map<std::string, sf::Vector2f> m_itemPositions;
     std::map<std::string, std::pair<sf::Text, sf::Vector2f>> m_menuItems;
 
     std::shared_ptr<CommandHandler> m_commandHandler;
@@ -26,6 +24,7 @@ private:
     std::shared_ptr<Ball> m_ball;
 
     void refreshScreen(sf::RenderWindow &window) override;
+
     template <typename... T>
     void handleCommand(CommandType command, float input, T *...components)
     {
@@ -39,7 +38,8 @@ private:
 
     void highlightMenuItem(float x, float y);
     // Create a circle shape to act as the marker
-    sf::CircleShape m_marker; // 10 is the radius of the circle
+    sf::CircleShape m_speedMarker;
+    sf::CircleShape m_difficultyMarker;
 };
 
 #endif // OPTIONSSCREEN_H

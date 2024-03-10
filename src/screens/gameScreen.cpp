@@ -108,7 +108,7 @@ void GameScreen::handleBallOffScreen(sf::RenderWindow &window, std::function<voi
         item.setString(m_scores[i]);
         item.setCharacterSize(50);
         item.setFillColor(sf::Color::White);
-        item.setPosition(370.f + 100 * i, 30.f);
+        item.setPosition(window.getSize().x / 2 - 75 + (150 * i), 30.f);
         m_scoreItems[i] = item;
     }
 }
@@ -139,56 +139,38 @@ void GameScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePa
         m_ball->setVelocityX(m_ball->getVelocityX() * -1);
     }
 
-    const float boundaryTop = 0;
-    const float boundaryBottom = 600;
-    const float moveDistance = 20;
+    auto drawBounce = [&spritePaddle1, &spritePaddle2, &window]()
+    {
+        window.clear();
+        window.draw(spritePaddle1);
+        window.draw(spritePaddle2);
+        window.display();
+    };
 
-    // Check if the sprite has gone beyond the boundary
-    if (rectSprite1.top <= boundaryTop)
+    // create a bounce
+    if (rectSprite1.top <= BOUNDRY_TOP)
     {
         std::cout << "collision with upper boundary detected\n";
-
-        spritePaddle1.move(0, moveDistance);
-
-        window.clear();
-
-        window.draw(spritePaddle1);
-        window.draw(spritePaddle2);
-
-        window.display();
+        spritePaddle1.move(0, MOVE_DISTANCE);
+        drawBounce();
     }
-    else if (rectSprite1.top + rectSprite1.height >= boundaryBottom)
+    else if (rectSprite1.top + rectSprite1.height >= BOUNDRY_BOTTOM)
     {
-
         std::cout << "collision with lower boundary detected\n";
-        spritePaddle1.move(0, -moveDistance);
-        window.clear();
-
-        window.draw(spritePaddle1);
-        window.draw(spritePaddle2);
-
-        window.display();
+        spritePaddle1.move(0, -MOVE_DISTANCE);
+        drawBounce();
     }
 
-    if (rectSprite2.top <= boundaryTop)
+    if (rectSprite2.top <= BOUNDRY_TOP)
     {
         std::cout << "collision with upper boundary detected\n";
-        spritePaddle2.move(0, moveDistance);
-        window.clear();
-
-        window.draw(spritePaddle1);
-        window.draw(spritePaddle2);
-        window.display();
+        spritePaddle2.move(0, MOVE_DISTANCE);
+        drawBounce();
     }
-    else if (rectSprite2.top + rectSprite2.height >= boundaryBottom)
+    else if (rectSprite2.top + rectSprite2.height >= BOUNDRY_BOTTOM)
     {
         std::cout << "collision with lower boundary detected\n";
-        spritePaddle2.move(0, -moveDistance);
-        window.clear();
-
-        window.draw(spritePaddle1);
-        window.draw(spritePaddle2);
-
-        window.display();
+        spritePaddle2.move(0, -MOVE_DISTANCE);
+        drawBounce();
     }
 }

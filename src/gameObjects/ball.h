@@ -18,7 +18,8 @@ public:
     void setVelocityX(float velocityX);
     void setVelocityY(float velocityY);
     void move();
-    void setSpeed(float inSpeed);
+    void setSpeed(int inSpeed);
+    void setDifficulty(int inDifficulty);
     sf::Sprite &getSprite();
     float getVelocityX() const;
     float getVelocityY() const;
@@ -27,7 +28,8 @@ private:
     sf::Sprite m_sprite;
     float m_velocityX;
     float m_velocityY;
-    const float m_initialSpeed = 2.0f; // Initial speed of the ball
+    static constexpr float INITIAL_SPEED = 2.0f; // Initial speed of the ball
+    static constexpr float INITIAL_BALL_SIZE = 0.8f;
 };
 
 #endif // BALL_H

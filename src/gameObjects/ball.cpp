@@ -21,6 +21,7 @@ Ball::Ball(sf::Texture &texture)
     // // srand((int)time(0));
 
     m_sprite.setTexture(texture);
+    m_sprite.setScale(INITIAL_BALL_SIZE, INITIAL_BALL_SIZE);
 
     static std::random_device rd;                             // Obtain a random number from hardware
     static std::mt19937 eng(rd());                            // Seed the generator
@@ -39,8 +40,8 @@ Ball::Ball(sf::Texture &texture)
     m_velocityY /= length;
 
     // Apply the constant speed to the direction
-    m_velocityX = m_velocityX * m_initialSpeed;
-    m_velocityY = m_velocityY * m_initialSpeed;
+    m_velocityX = m_velocityX * INITIAL_SPEED;
+    m_velocityY = m_velocityY * INITIAL_SPEED;
 }
 
 void Ball::reset(const sf::RenderWindow &window)
@@ -101,11 +102,43 @@ void Ball::move()
     std::cout << "Ball moved" << std::endl;
 }
 
-void Ball::setSpeed(float inSpeed)
+void Ball::setSpeed(int inSpeed)
 {
     // Increase the speed of the ball
     m_velocityX = inSpeed;
     m_velocityY = inSpeed;
+}
+
+void Ball::setDifficulty(int inDifficulty)
+{
+
+    if (inDifficulty == 1)
+    {
+        // increase size of ball
+        m_sprite.setScale(INITIAL_BALL_SIZE * 2, INITIAL_BALL_SIZE * 2);
+        // decrease ball speed
+        m_velocityX = INITIAL_SPEED / 2;
+        m_velocityY = INITIAL_SPEED / 2;
+    }
+    else if (inDifficulty == 2)
+    {
+        m_sprite.setScale(INITIAL_BALL_SIZE, INITIAL_BALL_SIZE);
+        m_velocityX = INITIAL_SPEED;
+        m_velocityY = INITIAL_SPEED;
+    }
+    else if (inDifficulty == 3)
+    {
+        // decrease size of ball
+        m_sprite.setScale(INITIAL_BALL_SIZE / 2, INITIAL_BALL_SIZE / 2);
+        // increase ball speed
+        m_velocityX = INITIAL_SPEED * 2;
+        m_velocityY = INITIAL_SPEED * 2;
+    }
+    else
+    {
+        std::cerr << "Invalid difficulty" << std::endl;
+        throw "Invalid difficulty";
+    }
 }
 
 void Ball::setVelocityX(float velocityX)
