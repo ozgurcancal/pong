@@ -24,39 +24,15 @@ OptionsScreen::OptionsScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &
 
 void OptionsScreen::refreshScreen(sf::RenderWindow &window)
 {
+}
+
+void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback)
+{
     if (m_paddle1 == nullptr || m_paddle2 == nullptr || m_ball == nullptr)
     {
         throw std::invalid_argument("Paddle or ball is null");
     }
 
-    std::cout << "in OptionsScreen::init\n";
-
-    // std::vector<sf::Text> menuItems;
-    // sf::Text txt("Game Speed", m_font, 25);
-    // txt.setPosition(100, 200);
-
-    // //  m_menuItems.push_back(txt);
-
-    // std::vector<std::string> titles = {"1-Slow", "2-Moderate", "3-Fast"};
-    // sf::Text item;
-    // for (int i = 0; i < titles.size(); ++i)
-    // {
-    //     item.setFont(m_font);
-    //     item.setString(titles[i]);
-    //     item.setCharacterSize(22);
-    //     item.setFillColor(sf::Color::White);
-    //     item.setPosition(350.f + i * 150, 200.f); // Adjust as needed
-    //                                               // m_menuItems.push_back(item);
-    // }
-
-    // item.setFont(m_font);
-    // item.setString("press esc for main menu");
-    // item.setPosition(250.f, 500.f); // Adjust as needed
-    //                                 //  m_menuItems.push_back(item);
-}
-
-void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback)
-{
     std::cout << "in OptionsScreen::uhandleInput\n";
     while (window.pollEvent(m_event))
     {
