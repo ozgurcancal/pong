@@ -2,8 +2,6 @@
 
 #include "screenManager.h"
 
-#include <mutex>
-
 ScreenManager::ScreenManager(sf::RenderWindow &window)
 {
     std::cout << "in ScreenManager ctor\n";
@@ -33,9 +31,9 @@ void ScreenManager::switchScreen(const std::string &screenName)
 
 void ScreenManager::handleInput(sf::RenderWindow &window)
 {
-    // to do callback i private member yap
     auto callback = [this](const std::string &screenName)
     { this->switchScreen(screenName); };
+
     m_screens[m_currentScreen]->handleInput(window, callback);
 }
 

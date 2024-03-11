@@ -85,25 +85,6 @@ void SinglePlayerScreen::handlePaddle2(sf::RenderWindow &window)
     }
 }
 
-// if (m_ball->getPosition().x > window.getSize().x / 2)
-// {
-//     // eger paddle in suan ki pozisyonu ile topun final pozisyonu arasinda ki mesafe ekran boyunun yarisindan buyukse
-//     if (m_paddle2->getPosition().y - m_finalBallPositionY > window.getSize().y / 3 && m_finalBallPositionY)
-//     {
-//         std::cout << "m_paddle2->getPosition().y " << m_paddle2->getPosition().y << "\n";
-//         std::cout << "m_finalBallPositionY = " << m_finalBallPositionY << "\n";
-//         if (m_finalBallPositionY - 10 > m_paddle2->getPosition().y)
-//             handleCommand(CommandType::MOVEDOWN, m_paddle2);
-//     }
-//     else if (m_ball->getPosition().y < m_paddle2->getPosition().y)
-//     {
-//         handleCommand(CommandType::MOVEUP, m_paddle2);
-//     }
-//     else if (m_ball->getPosition().y > m_paddle2->getPosition().y)
-//     {
-//         handleCommand(CommandType::MOVEDOWN, m_paddle2);
-//     }
-// }
 void SinglePlayerScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePaddle2, sf::Sprite &spriteBall, sf::RenderWindow &window)
 {
 
