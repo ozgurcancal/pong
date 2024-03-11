@@ -2,14 +2,6 @@
 #include "gameEngine.h"
 #include "screenManager.h"
 
-#include <iostream>
-#include <thread>
-#include <mutex>
-#include <atomic>
-#include <chrono>
-
-using namespace std;
-
 GameEngine::GameEngine() : m_window(sf::VideoMode(800, 600), "Pong Game")
 {
     m_inputController = std::make_unique<InputController>(m_window);
@@ -23,7 +15,6 @@ GameEngine::GameEngine() : m_window(sf::VideoMode(800, 600), "Pong Game")
 // }
 void GameEngine::run()
 {
-    std::cout << "Gameengine::run\n";
     setup();
 
     while (m_window.isOpen())
@@ -35,7 +26,6 @@ void GameEngine::run()
 
 void GameEngine::setup()
 {
-    std::cout << "Gameengine in setup\n";
     setWindowPosition();
 }
 

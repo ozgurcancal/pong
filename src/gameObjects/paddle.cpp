@@ -16,7 +16,6 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
         }
         else
         {
-            std::cout << "Paddle texture1 loaded" << std::endl;
             m_sprite.setScale(INITIAL_PADDLE_SIZE, INITIAL_PADDLE_SIZE);
         }
     }
@@ -31,7 +30,6 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
         }
         else
         {
-            std::cout << "Paddle texture2 loaded" << std::endl;
             m_sprite.setScale(INITIAL_PADDLE_SIZE, INITIAL_PADDLE_SIZE);
         }
     }
@@ -60,13 +58,11 @@ sf::Sprite &Paddle::getSprite()
 void Paddle::moveUp()
 {
     m_sprite.move(0, -m_velocity);
-    std::cout << "Paddle moved up" << std::endl;
 }
 
 void Paddle::moveDown()
 {
     m_sprite.move(0, m_velocity);
-    std::cout << "Paddle moved down" << std::endl;
 }
 
 void Paddle::setSpeed(int inSpeed)

@@ -1,8 +1,6 @@
 
 #include "commandHandler.h"
 
-#include <iostream> // std::cout icin eklendi
-
 std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Paddle *paddle)
 {
     if (paddle == nullptr)
@@ -24,7 +22,6 @@ std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Paddle *
 
 std::unique_ptr<Command> CommandHandler::createNew(CommandType command, Ball *ball)
 {
-    std::cerr << "CommandHandler::createNew(CommandType command, Ball* ball) " << std::endl;
     if (ball == nullptr)
     {
         throw std::invalid_argument("Ball is null");

@@ -6,8 +6,6 @@
 #include "screen.h"
 #include "commandHandler.h"
 
-#include <iostream>
-
 class GameScreen : public Screen
 {
 public:

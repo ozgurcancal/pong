@@ -9,8 +9,6 @@ SinglePlayerScreen::SinglePlayerScreen(sf::RenderWindow &window, std::shared_ptr
                                        std::shared_ptr<CommandHandler> &commandHandler)
     : GameScreen(window, paddle1, paddle2, ball, commandHandler)
 {
-    std::cout << "in gameScreen constructor\n";
-
     m_scoreItems[0] = sf::Text("0", m_font);
     m_scoreItems[0] = sf::Text("0", m_font);
     m_scoreItems[0].setPosition(470.f, 30.f);
@@ -24,10 +22,8 @@ void SinglePlayerScreen::handleInput(sf::RenderWindow &window, std::function<voi
         throw std::invalid_argument("Paddle or ball is null");
     }
 
-    std::cout << "in SinglePlayerScreen::handleInput\n";
     while (window.pollEvent(m_event))
     {
-        std::cout << "in pollevent\n";
         if (m_event.type == sf::Event::Closed)
         {
             window.close();
@@ -35,7 +31,6 @@ void SinglePlayerScreen::handleInput(sf::RenderWindow &window, std::function<voi
 
         if (m_event.type == sf::Event::KeyPressed)
         {
-            std::cout << "in keypressed\n";
             if (m_event.key.code == sf::Keyboard::W)
             {
                 handleCommand(CommandType::MOVEUP, m_paddle1);
@@ -80,7 +75,7 @@ void SinglePlayerScreen::handlePaddle2(sf::RenderWindow &window)
         }
         else
         {
-            //  handleCommand(CommandType::MOVEDOWN, m_paddle2); // implement behavior for when the AI decides to fail
+            // implement behavior for when the AI decides to fail
         }
     }
 }
@@ -99,25 +94,11 @@ void SinglePlayerScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &
 
         float paddle2CenterY = m_paddle2->getPosition().y + m_paddle2->getSprite().getGlobalBounds().height / 2;
 
-        // Adjust the failure mechanism
-        // Increase the base failure rate and adjust how it scales with deltaY
-        // max olasilik paddlesize - final position Y
-        //
-        // float baseFailureRate = 0.0f;                                                                            // Start with a 20% base failure rate
-        // float failureFactor = std::min(baseFailureRate + (std::abs(m_deltaY) / (window.getSize().y / 2)), 1.0f); // Scale failure rate with deltaY
-
-        // float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
-
-        // // Determine if paddle2 will fail to move correctly towards the ball
-        // m_willFail = randomValue < failureFactor;
-        // m_willFail = false;
-
         // calculate final position of the ball
         sf::Vector2f ballVelocity = m_ball->getVelocity();
         float timeToReachPaddle = (window.getSize().x - m_ball->getPosition().x) / ballVelocity.x;
-        // Calculate the Y position of the ball when it reaches paddle2, adjusting for window height
         m_finalBallPositionY = std::fmod((m_ball->getPosition().y + ballVelocity.y * timeToReachPaddle), window.getSize().y);
-        // m_finalBallPositionY = (m_ball->getPosition().y + ballVelocity.y * timeToReachPaddle) % window.getSize().y;
+
         m_deltaY = m_finalBallPositionY - paddle2CenterY;
         if (abs(m_deltaY) > window.getSize().y / 2)
         {
@@ -130,12 +111,8 @@ void SinglePlayerScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &
     }
     else if (rectBall.intersects(rectSprite2))
     {
-        // calculate final position of the ball
-        // sf::Vector2f ballVelocity = m_ball->getVelocity();
-        // float timeToReachPaddle = (window.getSize().x / 2 - m_ball->getPosition().x) / ballVelocity.x;
-        // m_finalBallPositionY = m_ball->getPosition().y + ballVelocity.y * timeToReachPaddle;
-
         m_ball->setVelocityX(m_ball->getVelocityX() * -1);
+        m_willFail = false;
     }
 
     auto drawBounce = [&spritePaddle1, &spritePaddle2, &window]()
@@ -149,26 +126,22 @@ void SinglePlayerScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &
     // create a bounce
     if (rectSprite1.top <= BOUNDRY_TOP)
     {
-        std::cout << "collision with upper boundary detected\n";
         spritePaddle1.move(0, MOVE_DISTANCE);
         drawBounce();
     }
     else if (rectSprite1.top + rectSprite1.height >= BOUNDRY_BOTTOM)
     {
-        std::cout << "collision with lower boundary detected\n";
         spritePaddle1.move(0, -MOVE_DISTANCE);
         drawBounce();
     }
 
     if (rectSprite2.top <= BOUNDRY_TOP)
     {
-        std::cout << "collision with upper boundary detected\n";
         spritePaddle2.move(0, MOVE_DISTANCE);
         drawBounce();
     }
     else if (rectSprite2.top + rectSprite2.height >= BOUNDRY_BOTTOM)
     {
-        std::cout << "collision with lower boundary detected\n";
         spritePaddle2.move(0, -MOVE_DISTANCE);
         drawBounce();
     }

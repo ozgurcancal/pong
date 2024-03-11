@@ -20,7 +20,6 @@ void MultiPlayerScreen::handleInput(sf::RenderWindow &window, std::function<void
 
     while (window.pollEvent(m_event))
     {
-        std::cout << "in pollevent\n";
         if (m_event.type == sf::Event::Closed)
         {
             window.close();
@@ -28,7 +27,6 @@ void MultiPlayerScreen::handleInput(sf::RenderWindow &window, std::function<void
 
         if (m_event.type == sf::Event::KeyPressed)
         {
-            std::cout << "in keypressed\n";
             if (m_event.key.code == sf::Keyboard::W)
             {
                 handleCommand(CommandType::MOVEUP, m_paddle1);

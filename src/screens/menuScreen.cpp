@@ -1,10 +1,6 @@
 
 #include "menuScreen.h"
 
-#include <iostream>
-#include <thread>
-#include <chrono>
-
 MenuScreen::MenuScreen(sf::RenderWindow &window)
 {
     refreshScreen(window);
@@ -12,15 +8,11 @@ MenuScreen::MenuScreen(sf::RenderWindow &window)
 
 void MenuScreen::refreshScreen(sf::RenderWindow &window)
 {
-    std::cout << "in MenuScreen::init\n";
     sf::Text text;
-    text.setFont(m_font); // Set the font
-
-    text.setCharacterSize(50);           // Set the character size in pixels
-    text.setFillColor(sf::Color::White); // Set the text color
-    text.setPosition(300, 400);          // Set the position of the text in the window
-
-    // std::vector<sf::Text> menuItems;
+    text.setFont(m_font);
+    text.setCharacterSize(50);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(300, 400);
 
     std::vector<std::string> titles = {"1- Single Player", "2- Multiplayer", "3- Options"};
     sf::Text item;
@@ -36,16 +28,14 @@ void MenuScreen::refreshScreen(sf::RenderWindow &window)
 
     item.setFont(m_font);
     item.setString("press any esc to exit");
-    item.setPosition(250.f, 500.f); // Adjust as needed
+    item.setPosition(350.f, 500.f); // Adjust as needed
     m_menuItems.push_back(item);
 }
 
 void MenuScreen::handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback)
 {
-    std::cout << "in MenuScreen::uhandleInput\n";
     while (window.pollEvent(m_event))
     {
-        std::cout << "in pollevent\n";
         if (m_event.type == sf::Event::Closed)
         {
             window.close();
@@ -53,10 +43,8 @@ void MenuScreen::handleInput(sf::RenderWindow &window, std::function<void(const 
 
         if (m_event.type == sf::Event::KeyPressed)
         {
-            std::cout << "in keypressed\n";
             if (m_event.key.code == sf::Keyboard::Num1)
             {
-
                 switchScreenCallback("SinglePlayerScreen");
                 break;
             }
@@ -82,8 +70,6 @@ void MenuScreen::handleInput(sf::RenderWindow &window, std::function<void(const 
 
 void MenuScreen::draw(sf::RenderWindow &window)
 {
-
-    std::cout << "in MenuScreen::draw\n";
     window.clear();
 
     // Draw menu items

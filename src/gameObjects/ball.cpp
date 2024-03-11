@@ -14,10 +14,6 @@ Ball::Ball(sf::Texture &texture)
         std::cerr << "Failed to load ball texture" << std::endl;
         throw "Failed to load ball texture";
     }
-    else
-    {
-        std::cout << "Paddle ball loaded" << std::endl;
-    }
 
     m_sprite.setTexture(texture);
     m_sprite.setScale(INITIAL_BALL_SIZE, INITIAL_BALL_SIZE);
@@ -91,14 +87,12 @@ sf::Sprite &Ball::getSprite()
 
 void Ball::move()
 {
-    // to do 0 ve 550 icin configurasyon degeri uret header da
     if (m_sprite.getPosition().y < BOUNDRY_TOP || m_sprite.getPosition().y > BOUNDRY_BOTTOM)
     {
         m_velocityY = -m_velocityY; // Reverse vertical velocity
     }
 
     m_sprite.move(m_velocityX, m_velocityY);
-    std::cout << "Ball moved" << std::endl;
 }
 
 void Ball::setSpeed(int inSpeed)

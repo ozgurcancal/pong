@@ -6,7 +6,6 @@
 
 GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball, std::shared_ptr<CommandHandler> &commendHandler) : m_paddle1(paddle1.get()), m_paddle2(paddle2.get()), m_ball(ball.get()), m_commandHandler(commendHandler.get())
 {
-    std::cout << "in gameScreen constructor\n";
 }
 
 void GameScreen::refreshScreen(sf::RenderWindow &window)
@@ -18,7 +17,6 @@ void GameScreen::refreshScreen(sf::RenderWindow &window)
 
 void GameScreen::draw(sf::RenderWindow &window)
 {
-    std::cout << "in draw\n";
     window.clear();
     window.draw(m_paddle1->getSprite());
     window.draw(m_paddle2->getSprite());
@@ -32,33 +30,27 @@ void GameScreen::draw(sf::RenderWindow &window)
 
 void GameScreen::handleBallOffScreen(sf::RenderWindow &window, std::function<void(const std::string &)> &switchScreenCallback)
 {
-    std::cout << "in handleBallOffScreen\n";
     if (m_ball->getSprite().getPosition().x < 0)
     {
         m_ScoreY++;
-        std::cout << "before refresh\n";
         refreshScreen(window);
     }
     else if (m_ball->getSprite().getPosition().x > 800)
     {
         m_ScoreX++;
-        std::cout << "before refresh\n";
         refreshScreen(window);
     }
     else if (m_ScoreX == 5 || m_ScoreY == 5)
     {
         m_ScoreX = 0;
         m_ScoreY = 0;
-        std::cout << "before callback\n";
         switchScreenCallback("GameOverScreen");
     }
 
-    std::cout << "in handleBallOffScreen2\n";
     m_scores[0] = std::to_string(m_ScoreX);
     m_scores[1] = std::to_string(m_ScoreY);
     sf::Text item;
 
-    std::cout << "m_scores.size() = " << m_scores.size() << "\n";
     for (int i = 0; i < m_scores.size(); ++i)
     {
         item.setFont(m_font);
@@ -68,13 +60,11 @@ void GameScreen::handleBallOffScreen(sf::RenderWindow &window, std::function<voi
         item.setPosition(window.getSize().x / 2 - 75 + (150 * i), 30.f);
         m_scoreItems[i] = item;
     }
-    std::cout << "in handleBallOffScreen3\n";
 }
 
 void GameScreen::drawScore(sf::RenderWindow &window)
 {
 
-    std::cout << "m_scoreItems.size()" << m_scoreItems.size();
     for (auto &item : m_scoreItems)
     {
         window.draw(item);
@@ -109,26 +99,22 @@ void GameScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePa
     // create a bounce
     if (rectSprite1.top <= BOUNDRY_TOP)
     {
-        std::cout << "collision with upper boundary detected\n";
         spritePaddle1.move(0, MOVE_DISTANCE);
         drawBounce();
     }
     else if (rectSprite1.top + rectSprite1.height >= BOUNDRY_BOTTOM)
     {
-        std::cout << "collision with lower boundary detected\n";
         spritePaddle1.move(0, -MOVE_DISTANCE);
         drawBounce();
     }
 
     if (rectSprite2.top <= BOUNDRY_TOP)
     {
-        std::cout << "collision with upper boundary detected\n";
         spritePaddle2.move(0, MOVE_DISTANCE);
         drawBounce();
     }
     else if (rectSprite2.top + rectSprite2.height >= BOUNDRY_BOTTOM)
     {
-        std::cout << "collision with lower boundary detected\n";
         spritePaddle2.move(0, -MOVE_DISTANCE);
         drawBounce();
     }

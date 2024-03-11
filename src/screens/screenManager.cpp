@@ -4,7 +4,6 @@
 
 ScreenManager::ScreenManager(sf::RenderWindow &window)
 {
-    std::cout << "in ScreenManager ctor\n";
     m_commandHandler = std::make_shared<CommandHandler>();
     m_paddle1 = m_gameObjectFactory.createPaddle(PaddleType::BLUE);
     m_paddle2 = m_gameObjectFactory.createPaddle(PaddleType::RED);

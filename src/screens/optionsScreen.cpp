@@ -2,11 +2,8 @@
 
 #include "optionsScreen.h"
 
-#include <iostream>
-
 OptionsScreen::OptionsScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball, std::shared_ptr<CommandHandler> &commendHandler) : m_paddle1(paddle1), m_paddle2(paddle2), m_ball(ball), m_commandHandler(commendHandler)
 {
-    std::cout << "in OptionsScreen constructor\n";
     auto windowSize = window.getSize();
     float refX = windowSize.x * 0.125f;
     float refY = windowSize.y * 0.3333f;
@@ -47,10 +44,8 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(con
         throw std::invalid_argument("Paddle or ball is null");
     }
 
-    std::cout << "in OptionsScreen::uhandleInput\n";
     while (window.pollEvent(m_event))
     {
-        std::cout << "in pollevent\n";
         if (m_event.type == sf::Event::Closed)
         {
             window.close();
@@ -61,7 +56,6 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(con
             if (m_event.key.code == sf::Keyboard::Num1)
             {
                 handleCommand(CommandType::SETSPEED, 1, m_ball.get(), m_paddle1.get(), m_paddle2.get());
-                std::cout << "speed decreased\n";
                 m_speedMarker.setPosition(m_menuItems["Slow"].second);
                 break;
             }
@@ -69,7 +63,6 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(con
             if (m_event.key.code == sf::Keyboard::Num2)
             {
                 handleCommand(CommandType::SETSPEED, 2, m_ball.get(), m_paddle1.get(), m_paddle2.get());
-                std::cout << "speed set to moderate\n";
                 m_speedMarker.setPosition(m_menuItems["Moderate"].second);
                 break;
             }
@@ -77,7 +70,6 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(con
             if (m_event.key.code == sf::Keyboard::Num3)
             {
                 handleCommand(CommandType::SETSPEED, 3, m_ball.get(), m_paddle1.get(), m_paddle2.get());
-                std::cout << "speed increased\n";
                 m_speedMarker.setPosition(m_menuItems["Fast"].second);
                 break;
             }
@@ -85,7 +77,6 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(con
             if (m_event.key.code == sf::Keyboard::Num4)
             {
                 handleCommand(CommandType::SETDIFFICULTY, 1, m_ball.get(), m_paddle1.get(), m_paddle2.get());
-                std::cout << "speed increased\n";
                 m_difficultyMarker.setPosition(m_menuItems["Easy"].second);
                 break;
             }
@@ -93,7 +84,6 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(con
             if (m_event.key.code == sf::Keyboard::Num5)
             {
                 handleCommand(CommandType::SETDIFFICULTY, 2, m_ball.get(), m_paddle1.get(), m_paddle2.get());
-                std::cout << "speed increased\n";
                 m_difficultyMarker.setPosition(m_menuItems["Medium"].second);
                 break;
             }
@@ -101,7 +91,6 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(con
             if (m_event.key.code == sf::Keyboard::Num6)
             {
                 handleCommand(CommandType::SETDIFFICULTY, 3, m_ball.get(), m_paddle1.get(), m_paddle2.get());
-                std::cout << "speed increased\n";
                 m_difficultyMarker.setPosition(m_menuItems["Hard"].second);
                 break;
             }
@@ -117,8 +106,6 @@ void OptionsScreen::handleInput(sf::RenderWindow &window, std::function<void(con
 
 void OptionsScreen::draw(sf::RenderWindow &window)
 {
-
-    std::cout << "in OptionsScreen::draw\n";
     window.clear();
 
     // Draw menu items
