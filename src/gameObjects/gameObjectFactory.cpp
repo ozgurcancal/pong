@@ -3,11 +3,11 @@
 
 std::shared_ptr<Paddle> GameObjectFactory::createPaddle(PaddleType type)
 {
-    if (type == PaddleType::Blue)
+    if (type == PaddleType::BLUE)
     {
         return std::make_shared<Paddle>(m_paddleTexture1, type);
     }
-    else if (type == PaddleType::Red)
+    else if (type == PaddleType::RED)
     {
         return std::make_shared<Paddle>(m_paddleTexture2, type);
     }

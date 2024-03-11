@@ -31,7 +31,7 @@ Ball::Ball(sf::Texture &texture)
         // Generate random value between -1.0 and 1.0
         m_velocityX = static_cast<float>(std::rand()) / RAND_MAX * 2.0 - 1.0;
         m_velocityY = static_cast<float>(std::rand()) / RAND_MAX * 2.0 - 1.0;
-    } while (m_velocityX < 0.3f && m_velocityX > -0.3f);
+    } while (m_velocityX < 0.3f && m_velocityX > -0.3f && m_velocityY == 0.0f);
 
     // Normalize the direction vector
     float length = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY);
@@ -97,6 +97,11 @@ void Ball::setSpeed(int inSpeed)
     // Increase the speed of the ball
     m_velocityX = inSpeed;
     m_velocityY = inSpeed;
+}
+
+sf::Vector2f Ball::getVelocity() const
+{
+    return sf::Vector2f(m_velocityX, m_velocityY);
 }
 
 void Ball::setDifficulty(int inDifficulty)

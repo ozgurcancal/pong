@@ -14,6 +14,7 @@ public:
     void setPosition(const sf::RenderWindow &window);
     void setVelocityX(float velocityX);
     void setVelocityY(float velocityY);
+    sf::Vector2f getVelocity() const;
     void move();
     void setSpeed(int inSpeed);
     void setDifficulty(int inDifficulty);
@@ -25,7 +26,7 @@ private:
     sf::Sprite m_sprite;
     float m_velocityX;
     float m_velocityY;
-    static constexpr float INITIAL_SPEED = 1.0f; // Initial speed of the ball
+    static constexpr float INITIAL_SPEED = 1.5f; // Initial speed of the ball
     static constexpr float INITIAL_BALL_SIZE = 0.8f;
 };
 

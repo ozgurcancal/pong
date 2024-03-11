@@ -12,6 +12,8 @@ GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle
 void GameScreen::refreshScreen(sf::RenderWindow &window)
 {
     m_ball->reset(window);
+    m_paddle1->reset(window);
+    m_paddle2->reset(window);
 }
 
 void GameScreen::draw(sf::RenderWindow &window)

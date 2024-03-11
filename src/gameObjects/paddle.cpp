@@ -5,8 +5,9 @@
 
 Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
 {
-    if (type == PaddleType::Blue)
+    if (type == PaddleType::BLUE)
     {
+        m_type = PaddleType::BLUE;
         // Load the paddle texture from file
         if (!paddleTexture.loadFromFile("assets/paddle1.png"))
         {
@@ -19,8 +20,9 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
             m_sprite.setScale(INITIAL_PADDLE_SIZE, INITIAL_PADDLE_SIZE);
         }
     }
-    else if (type == PaddleType::Red)
+    else if (type == PaddleType::RED)
     {
+        m_type = PaddleType::RED;
         // Load the paddle texture from file
         if (!paddleTexture.loadFromFile("assets/paddle2.png"))
         {
@@ -40,6 +42,14 @@ Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
     }
 
     m_sprite.setTexture(paddleTexture);
+}
+
+void Paddle::reset(const sf::RenderWindow &window)
+{
+    if (m_type == PaddleType::BLUE)
+        setPosition(window, PaddlePosition::LEFT);
+    else if (m_type == PaddleType::RED)
+        setPosition(window, PaddlePosition::RIGHT);
 }
 
 sf::Sprite &Paddle::getSprite()
@@ -94,7 +104,7 @@ sf::Vector2f Paddle::getPosition() const
 void Paddle::setPosition(const sf::RenderWindow &window, PaddlePosition position)
 {
     // Set the position of the paddle to either the left or right side of the screen
-    if (position == PaddlePosition::Left)
+    if (position == PaddlePosition::LEFT)
     {
         // The x position is the margin from the left edge
         float posX = MARGIN;
@@ -104,7 +114,7 @@ void Paddle::setPosition(const sf::RenderWindow &window, PaddlePosition position
 
         m_sprite.setPosition(posX, posY);
     }
-    else if (position == PaddlePosition::Right)
+    else if (position == PaddlePosition::RIGHT)
     {
         // Adjust posX for the right paddle
         float posX = window.getSize().x - m_sprite.getLocalBounds().width - MARGIN;

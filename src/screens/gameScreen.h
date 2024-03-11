@@ -15,6 +15,7 @@ public:
                std::shared_ptr<CommandHandler> &commandHandler);
 
     virtual void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) = 0;
+    virtual void handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePaddle2, sf::Sprite &spriteBall, sf::RenderWindow &window);
     void draw(sf::RenderWindow &window) override;
     void drawScore(sf::RenderWindow &window);
     void handleBallOffScreen(sf::RenderWindow &window, std::function<void(const std::string &)> &switchScreenCallback);
@@ -27,7 +28,6 @@ protected:
     Ball *m_ball;
 
     void refreshScreen(sf::RenderWindow &window);
-    void handleCollision(sf::Sprite &ps1, sf::Sprite &ps2, sf::Sprite &pb, sf::RenderWindow &window);
 
     template <typename T>
     void handleCommand(CommandType command, T *component)

@@ -5,7 +5,7 @@
 
 #include "gameScreen.h"
 
-class SinglePlayerScreen final : public GameScreen
+class SinglePlayerScreen : public GameScreen
 {
 
 public:
@@ -13,11 +13,12 @@ public:
                        std::shared_ptr<CommandHandler> &commandHandler);
 
     void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) override;
+    void handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePaddle2, sf::Sprite &spriteBall, sf::RenderWindow &window) override;
+    // void handleBallOffScreen(sf::RenderWindow &window, std::function<void(const std::string &)> &switchScreenCallback) override;
 
 private:
     void handlePaddle2(sf::RenderWindow &window);
-    //  sf::Event m_event;
-    //  std::vector<sf::Text> m_menuItems;
+    float m_finalBallPositionY;
 };
 
 #endif // SINGLE_PLAYER_SCREEN_H

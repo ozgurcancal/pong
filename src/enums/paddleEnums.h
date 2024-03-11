@@ -4,14 +4,15 @@
 
 enum class PaddleType
 {
-    Blue,
-    Red,
+    BLUE,
+    RED,
 };
 
 enum class PaddlePosition
 {
-    Left,
-    Right,
+    LEFT,
+    RIGHT,
+    MIDDLE,
 };
 
 #endif // PADDLE_ENUMS_H
