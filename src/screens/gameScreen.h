@@ -16,13 +16,13 @@ public:
     GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball,
                std::shared_ptr<CommandHandler> &commandHandler);
 
-    virtual void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) override;
+    virtual void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) = 0;
     void draw(sf::RenderWindow &window) override;
     void drawScore(sf::RenderWindow &window);
     void handleBallOffScreen(sf::RenderWindow &window, std::function<void(const std::string &)> &switchScreenCallback);
 
 protected:
-    std::vector<sf::Text> m_scoreItems;
+    std::array<sf::Text, 2> m_scoreItems;
     sf::Event m_event;
     CommandHandler *m_commandHandler;
     Paddle *m_paddle1, *m_paddle2;

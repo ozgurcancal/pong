@@ -33,7 +33,7 @@ public:
 private:
     sf::Sprite m_sprite;
     float m_velocity = 10.0f;
-    static constexpr float INITIAL_SPEED = 20.0f; // Initial speed of the paddle
+    static constexpr float INITIAL_SPEED = 10.0f; // Initial speed of the paddle
     static constexpr float INITIAL_PADDLE_SIZE = 0.5f;
     static constexpr float MARGIN = 30.0f; // Margin from the window edge
 };

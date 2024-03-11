@@ -7,8 +7,8 @@ SinglePlayerScreen::SinglePlayerScreen(sf::RenderWindow &window, std::shared_ptr
 {
     std::cout << "in gameScreen constructor\n";
 
-    m_scoreItems.push_back(sf::Text("0", m_font));
-    m_scoreItems.push_back(sf::Text("0", m_font));
+    m_scoreItems[0] = sf::Text("0", m_font);
+    m_scoreItems[0] = sf::Text("0", m_font);
     m_scoreItems[0].setPosition(470.f, 30.f);
     m_scoreItems[1].setPosition(570.f, 30.f);
 }

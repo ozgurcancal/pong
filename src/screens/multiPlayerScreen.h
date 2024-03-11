@@ -12,7 +12,7 @@ public:
                       std::shared_ptr<CommandHandler> &commandHandler);
 
     // void refreshScreen(sf::RenderWindow &window) override;
-    // void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) override;
+    void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) override;
     // void draw(sf::RenderWindow &window) override;
 
 private:

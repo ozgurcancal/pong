@@ -7,62 +7,11 @@
 GameScreen::GameScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball, std::shared_ptr<CommandHandler> &commendHandler) : m_paddle1(paddle1.get()), m_paddle2(paddle2.get()), m_ball(ball.get()), m_commandHandler(commendHandler.get())
 {
     std::cout << "in gameScreen constructor\n";
-
-    m_scoreItems.push_back(sf::Text("0", m_font));
-    m_scoreItems.push_back(sf::Text("0", m_font));
-    m_scoreItems[0].setPosition(470.f, 30.f);
-    m_scoreItems[1].setPosition(570.f, 30.f);
 }
 
 void GameScreen::refreshScreen(sf::RenderWindow &window)
 {
     m_ball->reset(window);
-}
-
-void GameScreen::handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback)
-{
-    if (m_paddle1 == nullptr || m_paddle2 == nullptr || m_ball == nullptr)
-    {
-        throw std::invalid_argument("Paddle or ball is null");
-    }
-
-    std::cout << "in GameScreen::handleInput\n";
-    while (window.pollEvent(m_event))
-    {
-        std::cout << "in pollevent\n";
-        if (m_event.type == sf::Event::Closed)
-        {
-            window.close();
-        }
-
-        if (m_event.type == sf::Event::KeyPressed)
-        {
-            std::cout << "in keypressed\n";
-            if (m_event.key.code == sf::Keyboard::W)
-            {
-                handleCommand(CommandType::MOVEUP, m_paddle1);
-            }
-            if (m_event.key.code == sf::Keyboard::S)
-            {
-                handleCommand(CommandType::MOVEDOWN, m_paddle1);
-            }
-            if (m_event.key.code == sf::Keyboard::Up)
-            {
-                handleCommand(CommandType::MOVEUP, m_paddle2);
-            }
-            if (m_event.key.code == sf::Keyboard::Down)
-            {
-                handleCommand(CommandType::MOVEDOWN, m_paddle2);
-            }
-            if (m_event.key.code == sf::Keyboard::Escape)
-            {
-                switchScreenCallback("MenuScreen");
-            }
-        }
-    }
-
-    handleCommand(CommandType::MOVE, m_ball);
-    handleBallOffScreen(window, switchScreenCallback);
 }
 
 void GameScreen::draw(sf::RenderWindow &window)
@@ -101,10 +50,7 @@ void GameScreen::handleBallOffScreen(sf::RenderWindow &window, std::function<voi
         std::cout << "before callback\n";
         switchScreenCallback("GameOverScreen");
     }
-    // m_scoreItems.push_back(sf::Text("0", m_font));
-    // m_scoreItems.push_back(sf::Text("0", m_font));
-    // m_scoreItems[0].setPosition(470.f, 30.f);
-    // m_scoreItems[1].setPosition(570.f, 30.f);
+
     std::cout << "in handleBallOffScreen2\n";
     m_scores[0] = std::to_string(m_ScoreX);
     m_scores[1] = std::to_string(m_ScoreY);
@@ -126,6 +72,7 @@ void GameScreen::handleBallOffScreen(sf::RenderWindow &window, std::function<voi
 void GameScreen::drawScore(sf::RenderWindow &window)
 {
 
+    std::cout << "m_scoreItems.size()" << m_scoreItems.size();
     for (auto &item : m_scoreItems)
     {
         window.draw(item);
