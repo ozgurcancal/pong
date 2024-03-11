@@ -22,6 +22,7 @@ endif()
 include_directories(${PROJECT_SOURCE_DIR}/src/gameObjects)
 include_directories(${PROJECT_SOURCE_DIR}/src/commands)
 include_directories(${PROJECT_SOURCE_DIR}/src/screens)
+include_directories(${PROJECT_SOURCE_DIR}/src/enums)
 
 set(HEADERS ${HEADERS}
 	${PROJECT_SOURCE_DIR}/src/commands/command.h
@@ -32,10 +33,13 @@ set(HEADERS ${HEADERS}
     ${PROJECT_SOURCE_DIR}/src/commands/commandHandler.h
     ${PROJECT_SOURCE_DIR}/src/commands/setDifficulty.h
 
-    ${PROJECT_SOURCE_DIR}/src/gameObjects/component.h
     ${PROJECT_SOURCE_DIR}/src/gameObjects/gameObjectFactory.h
     ${PROJECT_SOURCE_DIR}/src/gameObjects/paddle.h
     ${PROJECT_SOURCE_DIR}/src/gameObjects/ball.h
+
+    ${PROJECT_SOURCE_DIR}/src/enums/commandType.h
+    ${PROJECT_SOURCE_DIR}/src/enums/paddleEnums.h
+    ${PROJECT_SOURCE_DIR}/src/enums/gameMode.h
 
     ${PROJECT_SOURCE_DIR}/src/screens/screen.h
     ${PROJECT_SOURCE_DIR}/src/screens/gameScreen.h

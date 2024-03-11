@@ -4,19 +4,7 @@
 
 #include <SFML/Graphics.hpp>
 
-// #include "component.h"
-
-enum class PaddleType
-{
-    Blue,
-    Red,
-};
-
-enum class PaddlePosition
-{
-    Left,
-    Right,
-};
+#include "paddleEnums.h"
 
 class Paddle
 {

@@ -5,8 +5,6 @@
 
 #include "screen.h"
 #include "commandHandler.h"
-#include "component.h"
-// #include "gameObjectFactory.h"
 
 #include <iostream>
 

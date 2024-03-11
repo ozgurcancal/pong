@@ -8,7 +8,6 @@
 #include "setSpeed.h"
 #include "setDifficulty.h"
 
-#include "component.h"
 #include "paddle.h"
 #include "ball.h"
 

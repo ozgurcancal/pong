@@ -4,7 +4,6 @@
 #define INPUTCONTROLLER_H
 
 #include "commands/commandHandler.h"
-#include "component.h"
 #include "gameObjects/gameObjectFactory.h"
 #include "screens/screenManager.h"
 #include <map>
