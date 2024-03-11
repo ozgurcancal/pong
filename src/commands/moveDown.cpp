@@ -2,12 +2,9 @@
 
 #include "moveDown.h"
 
+MoveDown::MoveDown(Paddle *p) : paddle(p){};
 
-#include <iostream> // std::cout icin eklendi
-
-MoveDown::MoveDown(Paddle* p) : paddle(p) {};
-
-void MoveDown::execute() 
+void MoveDown::execute()
 {
-    paddle->moveDown(); 
+    paddle->moveDown();
 }

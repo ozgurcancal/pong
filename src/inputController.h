@@ -6,7 +6,6 @@
 #include "commands/commandHandler.h"
 #include "gameObjects/gameObjectFactory.h"
 #include "screens/screenManager.h"
-#include <map>
 
 class InputController
 {

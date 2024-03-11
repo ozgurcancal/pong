@@ -1,6 +1,10 @@
 
 #include "singlePlayerScreen.h"
 
+#include <thread>
+#include <chrono>
+#include <cmath> // Include cmath for fmod
+
 SinglePlayerScreen::SinglePlayerScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball,
                                        std::shared_ptr<CommandHandler> &commandHandler)
     : GameScreen(window, paddle1, paddle2, ball, commandHandler)
@@ -59,65 +63,46 @@ void SinglePlayerScreen::handlePaddle2(sf::RenderWindow &window)
         throw std::invalid_argument("Paddle or ball is null");
     }
 
+    // Only try to move paddle2 if the ball is on the right half of the screen and moving right
     if (m_ball->getPosition().x > window.getSize().x / 2)
     {
-        // eger paddle in suan ki pozisyonu ile topun final pozisyonu arasinda ki mesafe ekran boyunun yarisindan buyukse
-        if (m_paddle2->getPosition().y - m_finalBallPositionY > window.getSize().y / 3 && m_finalBallPositionY)
+
+        if (!m_willFail)
         {
-            std::cout << "m_paddle2->getPosition().y " << m_paddle2->getPosition().y << "\n";
-            std::cout << "m_finalBallPositionY = " << m_finalBallPositionY << "\n";
-            if (m_finalBallPositionY - 10 > m_paddle2->getPosition().y)
+            if (m_ball->getPosition().y < m_paddle2->getPosition().y)
+            {
+                handleCommand(CommandType::MOVEUP, m_paddle2);
+            }
+            else if (m_ball->getPosition().y > m_paddle2->getPosition().y + m_paddle2->getSprite().getGlobalBounds().height)
+            {
                 handleCommand(CommandType::MOVEDOWN, m_paddle2);
+            }
         }
-        else if (m_ball->getPosition().y < m_paddle2->getPosition().y)
+        else
         {
-            handleCommand(CommandType::MOVEUP, m_paddle2);
-        }
-        else if (m_ball->getPosition().y > m_paddle2->getPosition().y)
-        {
-            handleCommand(CommandType::MOVEDOWN, m_paddle2);
+            //  handleCommand(CommandType::MOVEDOWN, m_paddle2); // implement behavior for when the AI decides to fail
         }
     }
 }
-// void GameScreen::handleBallOffScreen(sf::RenderWindow &window, std::function<void(const std::string &)> &switchScreenCallback)
+
+// if (m_ball->getPosition().x > window.getSize().x / 2)
 // {
-//     std::cout << "in handleBallOffScreen\n";
-//     if (m_ball->getSprite().getPosition().x < 0)
+//     // eger paddle in suan ki pozisyonu ile topun final pozisyonu arasinda ki mesafe ekran boyunun yarisindan buyukse
+//     if (m_paddle2->getPosition().y - m_finalBallPositionY > window.getSize().y / 3 && m_finalBallPositionY)
 //     {
-//         m_ScoreY++;
-//         std::cout << "before refresh\n";
-//         refreshScreen(window);
+//         std::cout << "m_paddle2->getPosition().y " << m_paddle2->getPosition().y << "\n";
+//         std::cout << "m_finalBallPositionY = " << m_finalBallPositionY << "\n";
+//         if (m_finalBallPositionY - 10 > m_paddle2->getPosition().y)
+//             handleCommand(CommandType::MOVEDOWN, m_paddle2);
 //     }
-//     else if (m_ball->getSprite().getPosition().x > 800)
+//     else if (m_ball->getPosition().y < m_paddle2->getPosition().y)
 //     {
-//         m_ScoreX++;
-//         std::cout << "before refresh\n";
-//         refreshScreen(window);
+//         handleCommand(CommandType::MOVEUP, m_paddle2);
 //     }
-//     else if (m_ScoreX == 5 || m_ScoreY == 5)
+//     else if (m_ball->getPosition().y > m_paddle2->getPosition().y)
 //     {
-//         m_ScoreX = 0;
-//         m_ScoreY = 0;
-//         std::cout << "before callback\n";
-//         switchScreenCallback("GameOverScreen");
+//         handleCommand(CommandType::MOVEDOWN, m_paddle2);
 //     }
-
-//     std::cout << "in handleBallOffScreen2\n";
-//     m_scores[0] = std::to_string(m_ScoreX);
-//     m_scores[1] = std::to_string(m_ScoreY);
-//     sf::Text item;
-
-//     std::cout << "m_scores.size() = " << m_scores.size() << "\n";
-//     for (int i = 0; i < m_scores.size(); ++i)
-//     {
-//         item.setFont(m_font);
-//         item.setString(m_scores[i]);
-//         item.setCharacterSize(50);
-//         item.setFillColor(sf::Color::White);
-//         item.setPosition(window.getSize().x / 2 - 75 + (150 * i), 30.f);
-//         m_scoreItems[i] = item;
-//     }
-//     std::cout << "in handleBallOffScreen3\n";
 // }
 void SinglePlayerScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &spritePaddle2, sf::Sprite &spriteBall, sf::RenderWindow &window)
 {
@@ -130,13 +115,44 @@ void SinglePlayerScreen::handleCollision(sf::Sprite &spritePaddle1, sf::Sprite &
     if (rectBall.intersects(rectSprite1))
     {
         m_ball->setVelocityX(m_ball->getVelocityX() * -1);
+
+        float paddle2CenterY = m_paddle2->getPosition().y + m_paddle2->getSprite().getGlobalBounds().height / 2;
+
+        // Adjust the failure mechanism
+        // Increase the base failure rate and adjust how it scales with deltaY
+        // max olasilik paddlesize - final position Y
+        //
+        // float baseFailureRate = 0.0f;                                                                            // Start with a 20% base failure rate
+        // float failureFactor = std::min(baseFailureRate + (std::abs(m_deltaY) / (window.getSize().y / 2)), 1.0f); // Scale failure rate with deltaY
+
+        // float randomValue = static_cast<float>(rand()) / static_cast<float>(RAND_MAX);
+
+        // // Determine if paddle2 will fail to move correctly towards the ball
+        // m_willFail = randomValue < failureFactor;
+        // m_willFail = false;
+
+        // calculate final position of the ball
+        sf::Vector2f ballVelocity = m_ball->getVelocity();
+        float timeToReachPaddle = (window.getSize().x - m_ball->getPosition().x) / ballVelocity.x;
+        // Calculate the Y position of the ball when it reaches paddle2, adjusting for window height
+        m_finalBallPositionY = std::fmod((m_ball->getPosition().y + ballVelocity.y * timeToReachPaddle), window.getSize().y);
+        // m_finalBallPositionY = (m_ball->getPosition().y + ballVelocity.y * timeToReachPaddle) % window.getSize().y;
+        m_deltaY = m_finalBallPositionY - paddle2CenterY;
+        if (abs(m_deltaY) > window.getSize().y / 2)
+        {
+            m_willFail = true;
+        }
+        else
+        {
+            m_willFail = false;
+        }
     }
     else if (rectBall.intersects(rectSprite2))
     {
         // calculate final position of the ball
-        sf::Vector2f ballVelocity = m_ball->getVelocity();
-        float timeToReachPaddle = (window.getSize().x / 2 - m_ball->getPosition().x) / ballVelocity.x;
-        m_finalBallPositionY = m_ball->getPosition().y + ballVelocity.y * timeToReachPaddle;
+        // sf::Vector2f ballVelocity = m_ball->getVelocity();
+        // float timeToReachPaddle = (window.getSize().x / 2 - m_ball->getPosition().x) / ballVelocity.x;
+        // m_finalBallPositionY = m_ball->getPosition().y + ballVelocity.y * timeToReachPaddle;
 
         m_ball->setVelocityX(m_ball->getVelocityX() * -1);
     }

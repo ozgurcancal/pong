@@ -5,8 +5,6 @@ MultiPlayerScreen::MultiPlayerScreen(sf::RenderWindow &window, std::shared_ptr<P
                                      std::shared_ptr<CommandHandler> &commandHandler)
     : GameScreen(window, paddle1, paddle2, ball, commandHandler)
 {
-    std::cout << "in gameScreen constructor\n";
-
     m_scoreItems[0] = sf::Text("0", m_font);
     m_scoreItems[0] = sf::Text("0", m_font);
     m_scoreItems[0].setPosition(470.f, 30.f);
@@ -20,7 +18,6 @@ void MultiPlayerScreen::handleInput(sf::RenderWindow &window, std::function<void
         throw std::invalid_argument("Paddle or ball is null");
     }
 
-    std::cout << "in GameScreen::handleInput\n";
     while (window.pollEvent(m_event))
     {
         std::cout << "in pollevent\n";

@@ -7,11 +7,6 @@
 
 #include <memory>
 
-// enum class GameMode {
-//     SinglePlayer,
-//     Multiplayer
-// };
-
 class GameObjectFactory
 {
 public:

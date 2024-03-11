@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <cmath>
-#include <iostream> // std::cout icin eklendi
+#include <iostream>
 
 Ball::Ball(sf::Texture &texture)
 {
@@ -45,8 +45,17 @@ Ball::Ball(sf::Texture &texture)
 
 void Ball::reset(const sf::RenderWindow &window)
 {
-    // Define range
     float prevSpeed = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY); // Constant speed for the ball
+                                                                                        // Seed the random number generator with the current time
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+    // Ensure the ball does not move vertically
+    do
+    {
+        // Generate random value between -1.0 and 1.0
+        m_velocityX = static_cast<float>(std::rand()) / RAND_MAX * 2.0 - 1.0;
+        m_velocityY = static_cast<float>(std::rand()) / RAND_MAX * 2.0 - 1.0;
+    } while (m_velocityX < 0.3f && m_velocityX > -0.3f && m_velocityY == 0.0f);
 
     // Normalize the direction vector
     float length = std::sqrt(m_velocityX * m_velocityX + m_velocityY * m_velocityY);
@@ -83,7 +92,7 @@ sf::Sprite &Ball::getSprite()
 void Ball::move()
 {
     // to do 0 ve 550 icin configurasyon degeri uret header da
-    if (m_sprite.getPosition().y < 0 || m_sprite.getPosition().y > 550)
+    if (m_sprite.getPosition().y < BOUNDRY_TOP || m_sprite.getPosition().y > BOUNDRY_BOTTOM)
     {
         m_velocityY = -m_velocityY; // Reverse vertical velocity
     }

@@ -6,8 +6,6 @@ using namespace std;
 
 int main()
 {
-    // to do
-    // paddlein kenarina geldiginde topun yonu hem x hem y ekseninde degissin
     GameEngine gameController;
     gameController.run();
 

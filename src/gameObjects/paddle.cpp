@@ -1,7 +1,7 @@
 
 #include "paddle.h"
 
-#include <iostream> // std::std::cout icin eklendi
+#include <iostream>
 
 Paddle::Paddle(sf::Texture &paddleTexture, PaddleType type)
 {

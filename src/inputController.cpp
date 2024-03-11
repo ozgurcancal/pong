@@ -1,8 +1,6 @@
 
 #include "inputController.h"
 #include "gameObjectFactory.h"
-#include <iostream>
-#include <thread>
 
 InputController::InputController(sf::RenderWindow &window)
 {
