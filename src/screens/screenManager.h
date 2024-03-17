@@ -19,11 +19,12 @@ class ScreenManager
 
 public:
     ScreenManager(sf::RenderWindow &window);
-    void switchScreen(const std::string &screenName);
+
     void handleInput(sf::RenderWindow &window);
     void draw(sf::RenderWindow &window);
 
 private:
+    void switchScreen(const std::string &screenName);
     std::map<std::string, std::unique_ptr<Screen>> m_screens;
     std::string m_currentScreen;
     GameObjectFactory m_gameObjectFactory;

@@ -8,8 +8,8 @@ GameEngine::GameEngine() : m_window(sf::VideoMode(800, 600), "Pong Game")
 }
 
 // the three main stages of the game loop
-// while (mIsRunning) {
-//     ProcessInput();
+// while (IsRunning) {
+//     ProcessInput(); // if any
 //     UpdateGame();
 //     Draw();
 // }

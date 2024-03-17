@@ -5,7 +5,7 @@
 
 #include "gameScreen.h"
 
-class SinglePlayerScreen : public GameScreen
+class SinglePlayerScreen final : public GameScreen
 {
 public:
     SinglePlayerScreen(sf::RenderWindow &window, std::shared_ptr<Paddle> &paddle1, std::shared_ptr<Paddle> &paddle2, std::shared_ptr<Ball> &ball,

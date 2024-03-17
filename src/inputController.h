@@ -14,10 +14,8 @@ public:
 
     void handleInput(sf::RenderWindow &window);
     void draw(sf::RenderWindow &window);
-    void menu(sf::RenderWindow &window);
 
 private:
-    CommandHandler m_commandHandler;
     std::unique_ptr<ScreenManager> m_screenManager;
 };
 

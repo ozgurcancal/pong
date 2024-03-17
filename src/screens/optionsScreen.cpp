@@ -124,7 +124,6 @@ void OptionsScreen::draw(sf::RenderWindow &window)
 void OptionsScreen::highlightMenuItem(float x, float y)
 {
     // Create a circle shape to act as the marker
-    // 10 is the radius of the circle
-    m_speedMarker.setFillColor(sf::Color::Red); // Set the marker's color
-    m_speedMarker.setPosition(x, y);            // Position it centered around (300, 200)
+    m_speedMarker.setFillColor(sf::Color::Red);
+    m_speedMarker.setPosition(x, y);
 }
