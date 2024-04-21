@@ -7,6 +7,8 @@ GameEngine::GameEngine() : m_window(sf::VideoMode(800, 600), "Pong Game")
     m_inputController = std::make_unique<InputController>(m_window);
 }
 
+GameEngine::~GameEngine() = default;
+
 // the three main stages of the game loop
 // while (IsRunning) {
 //     ProcessInput(); // if any

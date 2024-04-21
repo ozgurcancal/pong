@@ -15,6 +15,7 @@ class GameEngine
 {
 public:
     GameEngine();
+    ~GameEngine();
     void run();
 
 private:

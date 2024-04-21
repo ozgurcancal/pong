@@ -1,6 +1,9 @@
 
 #include "gameObjectFactory.h"
 
+GameObjectFactory::GameObjectFactory() = default;
+GameObjectFactory::~GameObjectFactory() = default;
+
 std::shared_ptr<Paddle> GameObjectFactory::createPaddle(PaddleType type)
 {
     if (type == PaddleType::BLUE)

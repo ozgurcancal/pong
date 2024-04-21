@@ -19,6 +19,7 @@ class ScreenManager
 
 public:
     ScreenManager(sf::RenderWindow &window);
+    ~ScreenManager();
 
     void handleInput(sf::RenderWindow &window);
     void draw(sf::RenderWindow &window);

@@ -23,6 +23,8 @@ ScreenManager::ScreenManager(sf::RenderWindow &window)
     m_screens[m_currentScreen]->draw(window);
 }
 
+ScreenManager::~ScreenManager() = default;
+
 void ScreenManager::switchScreen(const std::string &screenName)
 {
     m_currentScreen = screenName;

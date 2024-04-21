@@ -11,6 +11,7 @@ class InputController
 {
 public:
     InputController(sf::RenderWindow &window);
+    ~InputController();
 
     void handleInput(sf::RenderWindow &window);
     void draw(sf::RenderWindow &window);

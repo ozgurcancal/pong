@@ -16,11 +16,11 @@ public:
     {
         loadFont("assets/GreatVibes.otf"); // Specify the default font path
     }
+    virtual ~Screen() = default;
     virtual void refreshScreen(sf::RenderWindow &window) = 0;
     virtual void handleInput(sf::RenderWindow &window, std::function<void(const std::string &)> switchScreenCallback) = 0;
     virtual void draw(sf::RenderWindow &window) = 0;
     // virtual void handleCollision(sf::Sprite &ps1, sf::Sprite &ps2, sf::Sprite &pb, sf::RenderWindow &window);
-    virtual ~Screen() = default;
 
 protected:
     sf::Font m_font;

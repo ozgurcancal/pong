@@ -7,6 +7,8 @@ InputController::InputController(sf::RenderWindow &window)
     m_screenManager = std::make_unique<ScreenManager>(window);
 }
 
+InputController::~InputController() = default;
+
 void InputController::handleInput(sf::RenderWindow &window)
 {
     m_screenManager->handleInput(window);

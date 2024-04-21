@@ -10,6 +10,8 @@
 class GameObjectFactory
 {
 public:
+    GameObjectFactory();
+    ~GameObjectFactory();
     std::shared_ptr<Paddle> createPaddle(PaddleType type);
     std::shared_ptr<Ball> createBall();
 
